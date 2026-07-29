@@ -119,7 +119,11 @@
     const message=(text,keep)=>{title.textContent='提示';desc.textContent=text;actions.innerHTML=`<div class="search-form"><div class="convert-preview"><b>${text}</b></div><div class="form-actions"><button id="ok" class="primary" type="button">返回</button></div></div>`;document.getElementById('ok').onclick=()=>keep?recordMenu():home()};
     const open=()=>{if(typeof setWindowVisible==='function')setWindowVisible(true);if(typeof setWindowTouch==='function')setWindowTouch(true);detail.classList.add('open')};
     const minimize=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false)};
-    const close=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false);if(typeof setWindowVisible==='function')setWindowVisible(false);try{if(typeof setButtonAction==='function')setButtonAction(()=>{})}catch(e){}};
+    const close=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false);try{if(typeof h5gg!=='undefined')h5gg.clearResults()}catch(e){}setTimeout(()=>{try{window.location.reload()}catch(e){location.href=location.href}},120)};
+    let touchStart=null,handledTouchButton=null;
+    document.addEventListener('touchstart',event=>{const button=event.target.closest&&event.target.closest('button');if(button&&detail.contains(button)){const point=event.changedTouches[0];touchStart={button,x:point.clientX,y:point.clientY}}},false);
+    document.addEventListener('touchend',event=>{const button=event.target.closest&&event.target.closest('button');if(!touchStart||button!==touchStart.button)return;const point=event.changedTouches[0],distance=Math.hypot(point.clientX-touchStart.x,point.clientY-touchStart.y);touchStart=null;if(distance>12||typeof button.onclick!=='function')return;event.preventDefault();handledTouchButton=button;button.onclick();},false);
+    document.addEventListener('click',event=>{const button=event.target.closest&&event.target.closest('button');if(button&&button===handledTouchButton){event.preventDefault();event.stopImmediatePropagation();handledTouchButton=null}},true);
     back.onclick=home;document.getElementById('minimize').onclick=minimize;document.getElementById('exit').onclick=close;
     if(typeof setButtonImage==='function')setButtonImage('https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/assistive-touch.png');
     if(typeof setButtonAction==='function')setButtonAction(open);
