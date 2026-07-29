@@ -17,12 +17,12 @@
 </head>
 <body>
   <section class="detail" id="detail" aria-live="polite">
-    <header class="detail-head"><h1 id="title">功能分区</h1><div class="head-actions"><button id="back" type="button" aria-label="返回">‹</button><button id="exit" type="button" aria-label="退出">×</button></div></header>
+    <header class="detail-head"><h1 id="title">功能分区</h1><div class="head-actions"><button id="back" type="button" aria-label="返回">‹</button><button id="minimize" type="button" aria-label="最小化">−</button><button id="exit" type="button" aria-label="彻底关闭">×</button></div></header>
     <p class="desc" id="desc"></p>
     <main class="actions" id="actions" aria-label="上下滑动选择功能"></main>
     <div class="loading" id="loading" aria-live="polite"><i class="spinner"></i><span>正在搜索</span></div>
   </section>
-  <script>
+  <script type="text/plain">
     const data={
       resource:{name:'资源修改',desc:'资源相关操作集中放置，进入后再按需展开。',items:[['资源方案','选择预设'],['快捷调整','打开输入'],['资源摘要','查看状态'],['同步配置','载入方案']]},
       general:{name:'将领修改',desc:'将领资料、属性与编组的紧凑入口。',items:[['将领选择','目标列表'],['属性方案','载入模板'],['编组管理','部队设置'],['方案保存','记录调整']]},
@@ -85,6 +85,46 @@
     document.getElementById('exit').onclick=()=>{restoreActiveColor();detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false)};
     if(typeof setButtonAction==='function')setButtonAction(openPanel);
     showZoneMenu();openPanel();
+  </script>
+  <script>
+  (()=>{
+    const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back'),loading=document.getElementById('loading');
+    const type='I32',rangeStart='0x00000000',rangeEnd='0x200000000',key=518867;
+    const encode=value=>(key^Number(value))|0,addr=(base,off=0n)=>'0x'+(BigInt(base)+BigInt(off)).toString(16),readI32=a=>Number(h5gg.getValue(a,type));
+    const colorValue=hex=>{const rgb=parseInt(hex.replace('#',''),16);return (0xFF000000|((rgb&255)<<16)|(rgb&0xFF00)|((rgb>>16)&255))>>>0};
+    const palette=['#E53935','#FB8C00','#FDD835','#7CB342','#43A047','#00ACC1','#1E88E5','#5E35B1','#8E24AA','#D81B60','#795548','#607D8B','#FFFFFF','#111827'];
+    let located=null,searchMode='',records=[];
+    try{records=JSON.parse(localStorage.getItem('wc4-legion-records')||'[]')}catch(e){}
+    const saveRecords=()=>{try{localStorage.setItem('wc4-legion-records',JSON.stringify(records.slice(0,30)))}catch(e){}};
+    const load=task=>{loading.classList.add('show');setTimeout(()=>{try{task()}catch(e){message('操作失败：'+(e.message||e))}finally{loading.classList.remove('show')}},260)};
+    const buttons=items=>{actions.innerHTML=items.map((x,i)=>`<button class="action" type="button" data-i="${i}"><strong>${x[0]}</strong><small>${x[1]||''}</small></button>`).join('');actions.scrollTop=0;document.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>items[Number(b.dataset.i)][2]())};
+    const home=()=>{title.textContent='功能分区';desc.textContent='选择修改分区。';back.classList.remove('show');buttons([['局外修改','贸易、将领、材料、勋章',outside],['局内修改','资源、兵种与通关功能',inside],['修改记录','已保存的地址记录',recordMenu]])};
+    const outside=()=>{title.textContent='局外修改';desc.textContent='局外功能入口。';back.classList.add('show');buttons([['贸易修改','贸易资源与次数',()=>message('贸易修改待接入预设。')],['将领修改','将领属性与编组',()=>message('将领修改待接入预设。')],['材料修改','材料数量管理',()=>message('材料修改待接入预设。')],['勋章修改','勋章库存管理',()=>message('勋章修改待接入预设。')]])};
+    const inside=()=>{title.textContent='局内修改';desc.textContent='按需进入战局功能。';back.classList.add('show');buttons([['资源修改','搜索并定位当前军团资源',resourceMenu],['兵种修改','单位属性与等级',()=>message('兵种修改待接入预设。')],['一键通关','当前战局结束控制',()=>message('一键通关需要单独提供通关标识。')]])};
+    const resourceMenu=()=>{title.textContent='资源修改';desc.textContent='选择搜索方式。';back.classList.add('show');buttons([['简单搜索','只输入经济数值，可能需要多次过滤',()=>searchForm('simple')],['三项搜索','经济、工业、科技联合过滤，更易唯一定位',()=>searchForm('triple')]])};
+    const searchForm=mode=>{searchMode=mode;title.textContent=mode==='simple'?'简单搜索':'三项搜索';desc.textContent=mode==='simple'?'输入当前经济值开始搜索。':'输入当前经济、工业、科技值进行联合过滤。';const fields=mode==='simple'?'<label>当前经济</label><input id="v1" type="number" inputmode="numeric" placeholder="例如：640">':'<label>经济 / 工业 / 科技</label><input id="v1" type="number" inputmode="numeric" placeholder="经济，例如：640"><input id="v2" type="number" inputmode="numeric" placeholder="工业，例如：240"><input id="v3" type="number" inputmode="numeric" placeholder="科技，例如：26">';actions.innerHTML=`<div class="search-form">${fields}<div class="form-actions"><button id="go" class="primary" type="button">开始搜索</button></div><p class="result-note">数值不会显示转换结果。</p></div>`;document.getElementById('go').onclick=()=>load(()=>startSearch(mode))};
+    const val=id=>Number(document.getElementById(id).value);
+    const valid=n=>Number.isInteger(n)&&n>=0&&n<=999999;
+    const startSearch=mode=>{if(typeof h5gg==='undefined')return message('请在 H5GG 中运行。');const a=val('v1'),b=mode==='triple'?val('v2'):null,c=mode==='triple'?val('v3'):null;if(!valid(a)||(mode==='triple'&&(!valid(b)||!valid(c))))return message('请输入有效的整数。');h5gg.clearResults();h5gg.searchNumber(String(encode(a)),type,rangeStart,rangeEnd);finishSearch(mode,{a,b,c})};
+    const finishSearch=(mode,values)=>{let results=h5gg.getResults(Math.min(h5gg.getResultsCount(),512),0);if(mode==='triple')results=results.filter(r=>readI32(addr(r.address,4n))===encode(values.b)&&readI32(addr(r.address,8n))===encode(values.c));if(results.length===1){located={address:results[0].address,mode,values};return locatedMenu()}if(results.length===0)return message('没有匹配结果，请确认数值或重新搜索。');refineForm(mode,values,results.length)};
+    const refineForm=(mode,old,count)=>{title.textContent='继续过滤';desc.textContent=`当前剩余 ${count} 条，请先在游戏内改变资源后输入新值。`;const fields=mode==='simple'?'<input id="r1" type="number" inputmode="numeric" placeholder="变化后的经济">':'<input id="r1" type="number" inputmode="numeric" placeholder="变化后的经济"><input id="r2" type="number" inputmode="numeric" placeholder="变化后的工业"><input id="r3" type="number" inputmode="numeric" placeholder="变化后的科技">';actions.innerHTML=`<div class="search-form">${fields}<div class="form-actions"><button id="refine" class="primary" type="button">再次搜索</button></div></div>`;document.getElementById('refine').onclick=()=>load(()=>{const a=val('r1'),b=mode==='triple'?val('r2'):null,c=mode==='triple'?val('r3'):null;if(!valid(a)||(mode==='triple'&&(!valid(b)||!valid(c))))return message('请输入有效的整数。');h5gg.searchNumber(String(encode(a)),type,rangeStart,rangeEnd);finishSearch(mode,{a,b,c})})};
+    const locatedMenu=()=>{title.textContent='资源已定位';desc.textContent='已定位经济地址，可选择后续操作。';back.classList.add('show');buttons([['保存地址记录','保存当前定位供后续调用',saveLocated],['资源修改','修改经济、工业、科技',editResources],['阵营修改','地址：经济 - 0x84，范围 0–6',editFaction],['玩家可控','地址：经济 + 0xC，范围 0/1',editControl],['底色修改','iOS 小端序颜色调色板',colorMenu]])};
+    const saveLocated=()=>{records.unshift({address:located.address,mode:located.mode,time:new Date().toLocaleString()});saveRecords();message('地址记录已保存。')};
+    const editResources=()=>{const a=prompt('经济新值：',String(located.values.a||''));if(a===null)return;const b=prompt('工业新值：',located.mode==='triple'?String(located.values.b):'');if(b===null)return;const c=prompt('科技新值：',located.mode==='triple'?String(located.values.c):'');if(c===null)return;const values=[Number(a),Number(b),Number(c)];if(values.some(x=>!valid(x)))return message('请输入有效资源数值。');if(typeof h5gg==='undefined')return message('请在 H5GG 中运行。');h5gg.setValue(located.address,String(encode(values[0])),type);h5gg.setValue(addr(located.address,4n),String(encode(values[1])),type);h5gg.setValue(addr(located.address,8n),String(encode(values[2])),type);message('资源已写入。')};
+    const editFaction=()=>{const value=Number(prompt('阵营值（0–6）：','0'));if(!Number.isInteger(value)||value<0||value>6)return message('阵营值只能是 0–6。');h5gg.setValue(addr(located.address,-0x84n),String(value),type);message('阵营已写入。')};
+    const editControl=()=>{const value=Number(prompt('玩家可控（0 或 1）：','1'));if(value!==0&&value!==1)return message('只能输入 0 或 1。');h5gg.setValue(addr(located.address,0xCn),String(value),type);message('玩家可控已写入。')};
+    const colorMenu=()=>{title.textContent='底色修改';desc.textContent='选择颜色，写入会自动转换为 iOS 小端序。';actions.innerHTML=`<div class="search-form"><div id="palette" style="display:grid;grid-template-columns:repeat(7,1fr);gap:7px">${palette.map(c=>`<button type="button" data-color="${c}" title="${c}" style="height:28px;border:1px solid rgba(255,255,255,.35);border-radius:9px;background:${c}"></button>`).join('')}</div><div class="form-actions" style="margin-top:9px"><button id="custom-color" class="primary" type="button">自定义颜色</button></div></div>`;document.querySelectorAll('[data-color]').forEach(b=>b.onclick=()=>writeColor(b.dataset.color));document.getElementById('custom-color').onclick=()=>{const c=prompt('输入 #RRGGBB：','#B48750');if(c&&/^#[0-9a-fA-F]{6}$/.test(c))writeColor(c.toUpperCase());else if(c)message('颜色格式应为 #RRGGBB。')}};
+    const writeColor=color=>{const colorAddress=addr(located.address,0x94n);if(!h5gg.setValue(colorAddress,String(colorValue(color)),'U32'))return message('底色写入失败。');message(`底色已改为 ${color}。`)};
+    const recordMenu=()=>{title.textContent='修改记录';desc.textContent='点击记录可重新打开对应操作。';back.classList.add('show');if(!records.length)return message('暂无已保存地址记录。',true);buttons(records.map((r,i)=>[`记录 ${i+1}`,`${r.address} · ${r.time}`,()=>{located={address:r.address,mode:r.mode||'simple',values:{}};locatedMenu()}]))};
+    const message=(text,keep)=>{title.textContent='提示';desc.textContent=text;actions.innerHTML=`<div class="search-form"><div class="convert-preview"><b>${text}</b></div><div class="form-actions"><button id="ok" class="primary" type="button">返回</button></div></div>`;document.getElementById('ok').onclick=()=>keep?recordMenu():home()};
+    const open=()=>{if(typeof setWindowVisible==='function')setWindowVisible(true);if(typeof setWindowTouch==='function')setWindowTouch(true);detail.classList.add('open')};
+    const minimize=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false)};
+    const close=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false);if(typeof setWindowVisible==='function')setWindowVisible(false);try{if(typeof setButtonAction==='function')setButtonAction(()=>{})}catch(e){}};
+    back.onclick=home;document.getElementById('minimize').onclick=minimize;document.getElementById('exit').onclick=close;
+    if(typeof setButtonImage==='function')setButtonImage('https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/assistive-touch.png');
+    if(typeof setButtonAction==='function')setButtonAction(open);
+    home();open();
+  })();
   </script>
 </body>
 </html>
