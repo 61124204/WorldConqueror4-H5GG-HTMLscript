@@ -27,7 +27,7 @@
       other:{name:'其他修改',desc:'外观、日志和通用配置管理。',items:[['界面外观','透明度设置'],['运行日志','查看记录'],['配置管理','导入导出'],['关于面板','版本说明']]}
     };
     const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back');
-    if(typeof setFloatButton==='function')setFloatButton('https://raw.githubusercontent.com/61124204/-4-H5GG-/main/control-center.svg');
+    if(typeof setButtonImage==='function')setButtonImage('https://raw.githubusercontent.com/61124204/-4-H5GG-/main/control-center.svg');
     const rangeStart='0x00000000',rangeEnd='0x200000000',type='I32',key=518867;
     const encode=value=>(key ^ value)|0;
     const showZoneMenu=()=>{title.textContent='功能分区';desc.textContent='选择需要的修改分区。';back.classList.remove('show');actions.innerHTML=Object.entries(data).map(([zone,z])=>`<button type="button" class="action" data-zone="${zone}"><strong>${z.name}</strong><small>${z.desc}</small></button>`).join('');actions.scrollTop=0;document.querySelectorAll('[data-zone]').forEach(btn=>btn.onclick=()=>showActionList(btn.dataset.zone))};
