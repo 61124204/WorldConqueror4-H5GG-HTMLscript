@@ -185,7 +185,7 @@
     document.addEventListener('click',event=>{const button=event.target.closest&&event.target.closest('button');if(button&&button===handledTouchButton){event.preventDefault();event.stopImmediatePropagation();handledTouchButton=null}else if(button&&detail.contains(button))playButtonSound(button)},true);
     back.onclick=goBack;document.getElementById('minimize').onclick=minimize;document.getElementById('exit').onclick=close;
     if(typeof setButtonAction==='function')setButtonAction(open);
-    home();open();preloadAssets();
+    home();open();preloadAssets().then(()=>{if(assetUrls.assistive&&typeof setButtonImage==='function'){try{setButtonImage(`${assetRoot}icons/assistive-touch.png?v=9d8aecd`)}catch(error){}}});
   })();
   </script>
 </body>
