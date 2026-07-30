@@ -33,6 +33,9 @@
     .action.icon-skill-empty:before{background-image:var(--asset-skill-empty,var(--wc-icons)) !important}
     .asset-loader{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:28px;border-radius:25px;background:rgba(19,25,38,.96);backdrop-filter:blur(12px);transition:opacity .22s ease}.asset-loader.done{opacity:0;pointer-events:none}.asset-card{width:100%;padding:17px 15px 15px;border:1px solid rgba(131,193,255,.28);border-radius:17px;background:rgba(255,255,255,.06);box-shadow:inset 0 1px rgba(255,255,255,.13)}.asset-title{font-size:14px;font-weight:650}.asset-state{min-height:17px;margin-top:8px;color:var(--muted);font-size:11px}.asset-track{height:7px;margin-top:12px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.12)}.asset-bar{width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#4da3ff,#8f82ff);box-shadow:0 0 12px rgba(77,163,255,.62);transition:width .2s ease}.asset-count{margin-top:7px;color:#bcdcff;font-size:10px;text-align:right}
   </style>
+  <style>
+    .asset-load-actions{display:flex;gap:8px;margin-top:14px}.asset-load-actions button{flex:1;height:31px;border:1px solid rgba(255,255,255,.17);border-radius:10px;background:rgba(255,255,255,.08);color:var(--text);font-size:11px}.asset-load-actions button.primary{border-color:rgba(77,163,255,.55);background:linear-gradient(135deg,#438fe3,#6463d8)}
+  </style>
   </head>
 <body>
   <section class="detail" id="detail" aria-live="polite">
@@ -40,7 +43,7 @@
     <p class="desc" id="desc"></p>
     <main class="actions" id="actions" aria-label="上下滑动选择功能"></main>
     <div class="loading" id="loading" aria-live="polite"><i class="spinner"></i><span>正在搜索</span></div>
-    <div class="asset-loader" id="asset-loader" aria-live="polite"><div class="asset-card"><div class="asset-title">正在加载界面素材</div><div class="asset-state" id="asset-state">准备联网获取素材…</div><div class="asset-track"><i class="asset-bar" id="asset-bar"></i></div><div class="asset-count" id="asset-count">0 / 10</div></div></div>
+    <div class="asset-loader" id="asset-loader" aria-live="polite"><div class="asset-card"><div class="asset-title">正在加载界面素材</div><div class="asset-state" id="asset-state">准备联网获取素材…</div><div class="asset-track"><i class="asset-bar" id="asset-bar"></i></div><div class="asset-count" id="asset-count">0 / 10</div><div class="asset-load-actions"><button id="asset-cancel" type="button">取消</button><button id="asset-skip" class="primary" type="button">跳过</button></div></div></div>
   </section>
   <script type="text/plain">
     const data={
@@ -108,7 +111,7 @@
   </script>
   <script>
   (()=>{
-    const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back'),loading=document.getElementById('loading'),assetLoader=document.getElementById('asset-loader'),assetState=document.getElementById('asset-state'),assetBar=document.getElementById('asset-bar'),assetCount=document.getElementById('asset-count');
+    const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back'),loading=document.getElementById('loading'),assetLoader=document.getElementById('asset-loader'),assetState=document.getElementById('asset-state'),assetBar=document.getElementById('asset-bar'),assetCount=document.getElementById('asset-count'),assetCancel=document.getElementById('asset-cancel'),assetSkip=document.getElementById('asset-skip');
     const type='I32',rangeStart='0x00000000',rangeEnd='0x200000000',key=518867;
     const encode=value=>(key^Number(value))|0,addr=(base,off=0n)=>'0x'+(BigInt(base)+BigInt(off)).toString(16),readI32=a=>Number(h5gg.getValue(a,type));
     const colorValue=hex=>{const rgb=parseInt(hex.replace('#',''),16);return (0xFF000000|((rgb&255)<<16)|(rgb&0xFF00)|((rgb>>16)&255))>>>0};
@@ -117,8 +120,12 @@
     const assetManifest=[
       ['assistive','icons/assistive-touch.png','悬浮按钮图标'],['generalReplace','icons/icon_general_replace.png','将领替换图标','--asset-general-replace'],['skillSlot','icons/icon_skill_slot.png','技能修改图标','--asset-skill-slot'],['skillEmpty','icons/icon_skill_empty_plus_v2.png','技能槽图标','--asset-skill-empty'],['portraits','generals/tacticalmap.webp','将领头像图集','--asset-portraits'],['generals','generals/generals-type1.json','将领资料','',true],['portraitMap','generals/tacticalmap.xml','头像坐标表','',true],['select','audio/sfx_select.wav','选择音效'],['cancel','audio/sfx_cancel.wav','返回音效'],['click','audio/sfx_click.wav','最小化音效']
     ];
-    const fetchAsset=url=>Promise.race([fetch(url),new Promise((_,reject)=>setTimeout(()=>reject(new Error('网络超时')),8000))]);
-    const preloadAssets=async()=>{let failed=0,completed=0;assetState.textContent='正在并行获取素材…';await Promise.all(assetManifest.map(async([key,file,label,cssVar,isText])=>{try{const response=await fetchAsset(assetRoot+file);if(!response.ok)throw new Error(`HTTP ${response.status}`);if(isText)assetTexts[key]=await response.text();else{const url=URL.createObjectURL(await response.blob());assetUrls[key]=url;if(cssVar)document.documentElement.style.setProperty(cssVar,`url("${url}")`);if(key==='assistive'&&typeof setButtonImage==='function')setButtonImage(url);if((key==='select'||key==='cancel'||key==='click')&&typeof soundUrls!=='undefined')soundUrls[key]=url}}catch(error){failed++}finally{completed++;assetState.textContent=`正在获取素材… ${label} 已完成`;assetBar.style.width=`${Math.round(completed/assetManifest.length*100)}%`;assetCount.textContent=`${completed} / ${assetManifest.length}`}}));assetState.textContent=failed?`${failed} 项获取失败，已使用默认素材。`:'素材加载完成';setTimeout(()=>assetLoader.classList.add('done'),420)};
+    let assetLoadCancelled=false,assetLoaderDismissed=false,assetAbortControllers=[];
+    const hideAssetLoader=()=>{assetLoaderDismissed=true;assetLoader.classList.add('done')};
+    const fetchAsset=url=>{const controller=typeof AbortController==='function'?new AbortController():null;if(controller)assetAbortControllers.push(controller);return Promise.race([fetch(url,controller?{signal:controller.signal}:undefined),new Promise((_,reject)=>setTimeout(()=>{if(controller)controller.abort();reject(new Error('网络超时'))},8000))])};
+    const preloadAssets=async()=>{let failed=0,completed=0;assetState.textContent='正在并行获取素材…';await Promise.all(assetManifest.map(async([key,file,label,cssVar,isText])=>{try{if(assetLoadCancelled)return;const response=await fetchAsset(assetRoot+file);if(!response.ok)throw new Error(`HTTP ${response.status}`);if(isText)assetTexts[key]=await response.text();else{const url=URL.createObjectURL(await response.blob());assetUrls[key]=url;if(cssVar)document.documentElement.style.setProperty(cssVar,`url("${url}")`);if(key==='assistive'&&typeof setButtonImage==='function')setButtonImage(url);if((key==='select'||key==='cancel'||key==='click')&&typeof soundUrls!=='undefined')soundUrls[key]=url}}catch(error){if(!assetLoadCancelled)failed++}finally{completed++;if(!assetLoaderDismissed){assetState.textContent=`正在获取素材… ${label} 已完成`;assetBar.style.width=`${Math.round(completed/assetManifest.length*100)}%`;assetCount.textContent=`${completed} / ${assetManifest.length}`}}}));if(!assetLoaderDismissed){assetState.textContent=assetLoadCancelled?'已取消加载，正在使用当前素材。':failed?`${failed} 项获取失败，已使用默认素材。`:'素材加载完成';setTimeout(hideAssetLoader,420)}};
+    assetCancel.onclick=()=>{assetLoadCancelled=true;assetAbortControllers.forEach(controller=>{try{controller.abort()}catch(error){}});assetAbortControllers=[];assetState.textContent='已取消加载，正在使用当前素材。';hideAssetLoader()};
+    assetSkip.onclick=()=>{assetState.textContent='素材将在后台继续加载。';hideAssetLoader()};
     const generalsDataUrl='',portraitMapUrl='';
     let located=null,searchMode='',records=[],generalsCache=null,portraitMap=null,generalSearchTimer=0,currentPage=null,pageStack=[];
     const setPage=page=>{currentPage=page};
