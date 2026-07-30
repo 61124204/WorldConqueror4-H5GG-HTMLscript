@@ -101,7 +101,7 @@
     const openPage=page=>{if(currentPage)pageStack.push(currentPage);page()};
     const goBack=()=>{const page=pageStack.pop();if(page)page();else home()};
     const loadPortraitMap=()=>fetch(portraitMapUrl).then(response=>response.ok?response.text():Promise.reject(new Error('头像坐标表下载失败'))).then(text=>{const map={},pattern=/<Image\s+name="head_([^"]+)\.png"\s+x="(\d+)"\s+y="(\d+)"/g;let match;while((match=pattern.exec(text)))map[match[1]]={x:Number(match[2]),y:Number(match[3])};return map}).catch(()=>({}));
-    const portraitFor=general=>portraitMap&&portraitMap[general.englishName];
+    const portraitFor=general=>portraitMap&&(portraitMap[general.photo]||portraitMap[general.englishName]);
     const portraitStyle=general=>{const portrait=portraitFor(general);return portrait?`--portrait-x:-${(portrait.x*4/7).toFixed(3)}px;--portrait-y:-${(portrait.y*4/7).toFixed(3)}px`:''};
     try{records=JSON.parse(localStorage.getItem('wc4-legion-records')||'[]')}catch(e){}
     const saveRecords=()=>{try{localStorage.setItem('wc4-legion-records',JSON.stringify(records.slice(0,30)))}catch(e){}};
