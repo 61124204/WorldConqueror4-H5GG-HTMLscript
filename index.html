@@ -113,7 +113,7 @@
     const encode=value=>(key^Number(value))|0,addr=(base,off=0n)=>'0x'+(BigInt(base)+BigInt(off)).toString(16),readI32=a=>Number(h5gg.getValue(a,type));
     const colorValue=hex=>{const rgb=parseInt(hex.replace('#',''),16);return (0xFF000000|((rgb&255)<<16)|(rgb&0xFF00)|((rgb>>16)&255))>>>0};
     const palette=['#E53935','#FB8C00','#FDD835','#7CB342','#43A047','#00ACC1','#1E88E5','#5E35B1','#8E24AA','#D81B60','#795548','#607D8B','#FFFFFF','#111827'];
-    const assetRoot='https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/refs/heads/main/assets/',assetUrls=Object.create(null),assetTexts=Object.create(null);
+    const assetRoot='https://cdn.jsdelivr.net/gh/61124204/WorldConqueror4-H5GG-HTMLscript@main/assets/',assetUrls=Object.create(null),assetTexts=Object.create(null);
     const assetManifest=[
       ['assistive','icons/assistive-touch.png','悬浮按钮图标'],['generalReplace','icons/icon_general_replace.png','将领替换图标','--asset-general-replace'],['skillSlot','icons/icon_skill_slot.png','技能修改图标','--asset-skill-slot'],['skillEmpty','icons/icon_skill_empty_plus_v2.png','技能槽图标','--asset-skill-empty'],['portraits','generals/tacticalmap.webp','将领头像图集','--asset-portraits'],['generals','generals/generals-type1.json','将领资料','',true],['portraitMap','generals/tacticalmap.xml','头像坐标表','',true],['select','audio/sfx_select.wav','选择音效'],['cancel','audio/sfx_cancel.wav','返回音效'],['click','audio/sfx_click.wav','最小化音效']
     ];
