@@ -26,10 +26,12 @@
     }
   </style>
   <style>
-    /* ????????? H5GG/WebView ??????? */
-    .action.icon-skill-empty:before{
-      background-image:url('https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/refs/heads/main/icon_skill_empty_plus_v2.png?v=clean-plus-v2') !important;
-    }
+    /* 外部素材由脚本统一下载；下载失败时退回内嵌图标。 */
+    .action.has-portrait:before{background-image:var(--asset-portraits,var(--wc-icons)) !important}
+    .action.icon-general-replace:before{background-image:var(--asset-general-replace,var(--wc-icons)) !important}
+    .action.icon-skill-slot:before{background-image:var(--asset-skill-slot,var(--wc-icons)) !important}
+    .action.icon-skill-empty:before{background-image:var(--asset-skill-empty,var(--wc-icons)) !important}
+    .asset-loader{position:absolute;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:28px;border-radius:25px;background:rgba(19,25,38,.96);backdrop-filter:blur(12px);transition:opacity .22s ease}.asset-loader.done{opacity:0;pointer-events:none}.asset-card{width:100%;padding:17px 15px 15px;border:1px solid rgba(131,193,255,.28);border-radius:17px;background:rgba(255,255,255,.06);box-shadow:inset 0 1px rgba(255,255,255,.13)}.asset-title{font-size:14px;font-weight:650}.asset-state{min-height:17px;margin-top:8px;color:var(--muted);font-size:11px}.asset-track{height:7px;margin-top:12px;overflow:hidden;border-radius:99px;background:rgba(255,255,255,.12)}.asset-bar{width:0;height:100%;border-radius:inherit;background:linear-gradient(90deg,#4da3ff,#8f82ff);box-shadow:0 0 12px rgba(77,163,255,.62);transition:width .2s ease}.asset-count{margin-top:7px;color:#bcdcff;font-size:10px;text-align:right}
   </style>
   </head>
 <body>
@@ -38,6 +40,7 @@
     <p class="desc" id="desc"></p>
     <main class="actions" id="actions" aria-label="上下滑动选择功能"></main>
     <div class="loading" id="loading" aria-live="polite"><i class="spinner"></i><span>正在搜索</span></div>
+    <div class="asset-loader" id="asset-loader" aria-live="polite"><div class="asset-card"><div class="asset-title">正在加载界面素材</div><div class="asset-state" id="asset-state">准备联网获取素材…</div><div class="asset-track"><i class="asset-bar" id="asset-bar"></i></div><div class="asset-count" id="asset-count">0 / 10</div></div></div>
   </section>
   <script type="text/plain">
     const data={
@@ -46,7 +49,7 @@
       battle:{name:'局内修改',desc:'局内功能按需显示，不占用战场视野。',items:[['局内资源','资源与势力修改'],['回合工具','快捷控制'],['单位管理','当前单位'],['战场状态','局内摘要']]},
       other:{name:'其他修改',desc:'外观、日志和通用配置管理。',items:[['界面外观','透明度设置'],['运行日志','查看记录'],['配置管理','导入导出'],['关于面板','版本说明']]}
     };
-    const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back'),loading=document.getElementById('loading');
+    const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back'),loading=document.getElementById('loading'),assetLoader=document.getElementById('asset-loader'),assetState=document.getElementById('asset-state'),assetBar=document.getElementById('asset-bar'),assetCount=document.getElementById('asset-count');
     let touchStart=null,handledTouchButton=null;
     document.addEventListener('touchstart',event=>{const button=event.target.closest&&event.target.closest('button');if(button&&detail.contains(button)){const point=event.changedTouches[0];touchStart={button,x:point.clientX,y:point.clientY}}},false);
     document.addEventListener('touchend',event=>{const button=event.target.closest&&event.target.closest('button');if(!touchStart||button!==touchStart.button)return;const point=event.changedTouches[0],distance=Math.hypot(point.clientX-touchStart.x,point.clientY-touchStart.y);touchStart=null;if(distance>12||typeof button.onclick!=='function')return;event.preventDefault();handledTouchButton=button;button.onclick();},false);
@@ -105,17 +108,23 @@
   </script>
   <script>
   (()=>{
-    const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back'),loading=document.getElementById('loading');
+    const detail=document.getElementById('detail'),title=document.getElementById('title'),desc=document.getElementById('desc'),actions=document.getElementById('actions'),back=document.getElementById('back'),loading=document.getElementById('loading'),assetLoader=document.getElementById('asset-loader'),assetState=document.getElementById('asset-state'),assetBar=document.getElementById('asset-bar'),assetCount=document.getElementById('asset-count');
     const type='I32',rangeStart='0x00000000',rangeEnd='0x200000000',key=518867;
     const encode=value=>(key^Number(value))|0,addr=(base,off=0n)=>'0x'+(BigInt(base)+BigInt(off)).toString(16),readI32=a=>Number(h5gg.getValue(a,type));
     const colorValue=hex=>{const rgb=parseInt(hex.replace('#',''),16);return (0xFF000000|((rgb&255)<<16)|(rgb&0xFF00)|((rgb>>16)&255))>>>0};
     const palette=['#E53935','#FB8C00','#FDD835','#7CB342','#43A047','#00ACC1','#1E88E5','#5E35B1','#8E24AA','#D81B60','#795548','#607D8B','#FFFFFF','#111827'];
-    const generalsDataUrl='https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/generals-type1.json',portraitMapUrl='https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/tacticalmap.xml';
+    const assetRoot='https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/refs/heads/main/',assetUrls=Object.create(null),assetTexts=Object.create(null);
+    const assetManifest=[
+      ['assistive','assistive-touch.png','悬浮按钮图标'],['generalReplace','icon_general_replace.png','将领替换图标','--asset-general-replace'],['skillSlot','icon_skill_slot.png','技能修改图标','--asset-skill-slot'],['skillEmpty','icon_skill_empty_plus_v2.png','技能槽图标','--asset-skill-empty'],['portraits','tacticalmap.webp','将领头像图集','--asset-portraits'],['generals','generals-type1.json','将领资料','',true],['portraitMap','tacticalmap.xml','头像坐标表','',true],['select','sfx_select.wav','选择音效'],['cancel','sfx_cancel.wav','返回音效'],['click','sfx_click.wav','最小化音效']
+    ];
+    const fetchAsset=url=>Promise.race([fetch(url),new Promise((_,reject)=>setTimeout(()=>reject(new Error('网络超时')),8000))]);
+    const preloadAssets=async()=>{let failed=0;for(let i=0;i<assetManifest.length;i++){const [key,file,label,cssVar,isText]=assetManifest[i];assetState.textContent=`正在获取 ${label}…`;try{const response=await fetchAsset(assetRoot+file);if(!response.ok)throw new Error(`HTTP ${response.status}`);if(isText)assetTexts[key]=await response.text();else{const url=URL.createObjectURL(await response.blob());assetUrls[key]=url;if(cssVar)document.documentElement.style.setProperty(cssVar,`url("${url}")`);if(key==='assistive'&&typeof setButtonImage==='function')setButtonImage(url);if((key==='select'||key==='cancel'||key==='click')&&typeof soundUrls!=='undefined')soundUrls[key]=url}}catch(error){failed++}assetBar.style.width=`${Math.round((i+1)/assetManifest.length*100)}%`;assetCount.textContent=`${i+1} / ${assetManifest.length}`}assetState.textContent=failed?`${failed} 项获取失败，已使用默认素材。`:'素材加载完成';setTimeout(()=>assetLoader.classList.add('done'),420)};
+    const generalsDataUrl='',portraitMapUrl='';
     let located=null,searchMode='',records=[],generalsCache=null,portraitMap=null,generalSearchTimer=0,currentPage=null,pageStack=[];
     const setPage=page=>{currentPage=page};
     const openPage=page=>{if(currentPage)pageStack.push(currentPage);page()};
     const goBack=()=>{const page=pageStack.pop();if(page)page();else home()};
-    const loadPortraitMap=()=>fetch(portraitMapUrl).then(response=>response.ok?response.text():Promise.reject(new Error('头像坐标表下载失败'))).then(text=>{const map={},pattern=/<Image\s+name="head_([^"]+)\.png"\s+x="(\d+)"\s+y="(\d+)"/g;let match;while((match=pattern.exec(text)))map[match[1]]={x:Number(match[2]),y:Number(match[3])};return map}).catch(()=>({}));
+    const loadPortraitMap=()=>Promise.resolve(assetTexts.portraitMap||'').then(text=>{const map={},pattern=/<Image\s+name="head_([^"]+)\.png"\s+x="(\d+)"\s+y="(\d+)"/g;let match;while((match=pattern.exec(text)))map[match[1]]={x:Number(match[2]),y:Number(match[3])};return map}).catch(()=>({}));
     const portraitFor=general=>portraitMap&&(portraitMap[general.photo]||portraitMap[general.englishName]);
     const portraitStyle=general=>{const portrait=portraitFor(general);return portrait?`--portrait-x:-${(portrait.x*4/7).toFixed(3)}px;--portrait-y:-${(portrait.y*4/7).toFixed(3)}px`:''};
     try{records=JSON.parse(localStorage.getItem('wc4-legion-records')||'[]')}catch(e){}
@@ -134,7 +143,7 @@
     const tradeMenu=()=>{setPage(tradeMenu);title.textContent='贸易修改';desc.textContent='勋章功能入口。';back.classList.add('show');buttons([['勋章修改','联合定位并修改勋章数量',medalModify]])};
     const outside=()=>{setPage(outside);title.textContent='局外修改';desc.textContent='局外功能入口。';back.classList.add('show');buttons([['贸易修改','勋章功能入口',tradeMenu],['将领修改','技能槽修改与将领联合定位',generalMenu],['材料修改','材料数量管理',()=>message('材料修改待接入预设。')]])};
     const generalMenu=()=>{setPage(generalMenu);title.textContent='将领修改';desc.textContent='选择需要进行的将领功能。';back.classList.add('show');buttons([['将领替换','替换已定位将领',()=>message('将领替换等待提供替换规则。')],['技能槽修改','将领联合定位与技能槽调整',generalSkillSlotMenu],['技能修改','指定技能数值调整',()=>message('技能修改等待提供技能偏移规则。')],['面板能力修改','步、坦、炮、海、空与行军能力',()=>message('面板能力修改等待提供能力偏移规则。')]])};
-    const generalSkillSlotMenu=()=>{setPage(generalSkillSlotMenu);title.textContent='技能槽修改';desc.textContent='从 Type=1 将领表选择目标，联合定位其唯一 ID 地址。';back.classList.add('show');if(generalsCache)return showGeneralPicker();loading.classList.add('show');Promise.all([fetch(generalsDataUrl).then(response=>{if(!response.ok)throw new Error('将领表下载失败');return response.json()}),loadPortraitMap()]).then(([data,map])=>{generalsCache=data.generals||[];portraitMap=map;loading.classList.remove('show');showGeneralPicker()}).catch(error=>{loading.classList.remove('show');message(error.message||'将领表加载失败。')})};
+    const generalSkillSlotMenu=()=>{setPage(generalSkillSlotMenu);title.textContent='技能槽修改';desc.textContent='从 Type=1 将领表选择目标，联合定位其唯一 ID 地址。';back.classList.add('show');if(generalsCache)return showGeneralPicker();loading.classList.add('show');Promise.all([Promise.resolve(assetTexts.generals?JSON.parse(assetTexts.generals):{generals:[]}),loadPortraitMap()]).then(([data,map])=>{generalsCache=data.generals||[];portraitMap=map;loading.classList.remove('show');showGeneralPicker()}).catch(error=>{loading.classList.remove('show');message(error.message||'将领表加载失败。')})};
     const escapeHtml=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
     const showGeneralPicker=(keyword='',page=0,restoreFocus=false)=>{setPage(()=>showGeneralPicker(keyword,page,restoreFocus));const terms=keyword.trim().toLowerCase().split(/\s+/).filter(Boolean),all=generalsCache.filter(g=>{const haystack=`${g.name} ${g.englishName||''} ${g.id}`.toLowerCase();return terms.every(term=>haystack.includes(term))}),pageSize=30,totalPages=Math.max(1,Math.ceil(all.length/pageSize)),safePage=Math.min(Math.max(0,page),totalPages-1),list=all.slice(safePage*pageSize,(safePage+1)*pageSize);title.textContent='技能槽修改';desc.textContent=`Type=1 将领：${all.length} 位，第 ${safePage+1}/${totalPages} 页。可用空格联合筛选姓名与 ID。`;actions.innerHTML=`<div class="search-form general-search"><input id="general-key" type="search" autocomplete="off" placeholder="输入姓名或 ID，输入即筛选" value="${escapeHtml(keyword)}"></div><div id="general-list"></div><div class="form-actions" style="margin-top:8px"><button id="general-prev" type="button" ${safePage===0?'disabled':''}>上一页</button><button id="general-next" type="button" ${safePage>=totalPages-1?'disabled':''}>下一页</button></div>`;const resetGeneralScroll=()=>{actions.scrollTop=0;try{actions.scrollTo(0,0)}catch(error){}};resetGeneralScroll();requestAnimationFrame(resetGeneralScroll);setTimeout(resetGeneralScroll,60);const input=document.getElementById('general-key'),host=document.getElementById('general-list');host.innerHTML=list.map((g,i)=>`<button type="button" class="action ${portraitFor(g)?'has-portrait':'icon-general-card'}" style="${portraitStyle(g)}" data-general="${i}"><strong>${g.name} · ${g.id}</strong><small>${g.englishName||'Unknown'}</small></button>`).join('')||'<p class="result-note">未找到匹配将领。</p>';let composing=false;const queueSearch=()=>{if(composing)return;clearTimeout(generalSearchTimer);generalSearchTimer=setTimeout(()=>showGeneralPicker(input.value,0,true),180)};input.oninput=queueSearch;input.oncompositionstart=()=>{composing=true};input.oncompositionend=()=>{composing=false;queueSearch()};document.getElementById('general-prev').onclick=()=>safePage>0&&showGeneralPicker(keyword,safePage-1);document.getElementById('general-next').onclick=()=>safePage<totalPages-1&&showGeneralPicker(keyword,safePage+1);host.querySelectorAll('[data-general]').forEach(button=>button.onclick=()=>openPage(()=>load(()=>locateGeneral(list[Number(button.dataset.general)]))));if(restoreFocus){input.focus();input.setSelectionRange(input.value.length,input.value.length)}};
     const generalExpectedValues=g=>[g.id,g.initial.march,g.initial.infantry,g.initial.armor,g.initial.artillery,g.initial.navy,g.initial.airForce,g.maximum.march,g.maximum.infantry,g.maximum.artillery,g.maximum.armor,g.maximum.navy,g.maximum.airForce];
@@ -164,8 +173,8 @@
     const writeColor=color=>{const colorAddress=addr(located.address,0x94n);if(!h5gg.setValue(colorAddress,String(colorValue(color)),'U32'))return doneAtLocated('底色写入失败。');doneAtLocated(`底色已改为 ${color}。`)};
     const recordMenu=()=>{setPage(recordMenu);title.textContent='修改记录';desc.textContent='点击记录可重新打开对应操作。';back.classList.add('show');if(!records.length)return message('暂无已保存地址记录。',true);buttons(records.map((r,i)=>[`记录 ${i+1}`,`${r.address} · ${r.time}`,()=>{located={address:r.address,mode:r.mode||'simple',values:{}};locatedMenu()}]))};
     const message=(text,keep)=>{setPage(()=>message(text,keep));title.textContent='提示';desc.textContent=text;actions.innerHTML=`<div class="search-form"><div class="convert-preview"><b>${text}</b></div><div class="form-actions"><button id="ok" class="primary" type="button">返回</button></div></div>`;document.getElementById('ok').onclick=goBack};
-    const soundUrls={select:'https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/sfx_select.wav',cancel:'https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/sfx_cancel.wav',click:'https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/sfx_click.wav'},soundPlayers={};
-    const playSound=kind=>{try{const player=soundPlayers[kind]||(soundPlayers[kind]=new Audio(soundUrls[kind]));player.currentTime=0;const play=player.play();if(play)play.catch(()=>{})}catch(error){}};
+    const soundUrls={select:'',cancel:'',click:''},soundPlayers={};
+    const playSound=kind=>{if(!soundUrls[kind])return;try{const player=soundPlayers[kind]||(soundPlayers[kind]=new Audio(soundUrls[kind]));player.currentTime=0;const play=player.play();if(play)play.catch(()=>{})}catch(error){}};
     const playButtonSound=button=>{if(!button)return;const isReturn=button.id==='back'||button.textContent.includes('返回');playSound(button.id==='minimize'?'click':isReturn?'cancel':'select')};
     const open=()=>{if(typeof setWindowVisible==='function')setWindowVisible(true);if(typeof setWindowTouch==='function')setWindowTouch(true);detail.classList.add('open')};
     const minimize=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false)};
@@ -175,9 +184,8 @@
     document.addEventListener('touchend',event=>{const button=event.target.closest&&event.target.closest('button');if(!touchStart||button!==touchStart.button)return;const point=event.changedTouches[0],distance=Math.hypot(point.clientX-touchStart.x,point.clientY-touchStart.y);touchStart=null;if(distance>12||typeof button.onclick!=='function')return;event.preventDefault();handledTouchButton=button;playButtonSound(button);button.onclick();},false);
     document.addEventListener('click',event=>{const button=event.target.closest&&event.target.closest('button');if(button&&button===handledTouchButton){event.preventDefault();event.stopImmediatePropagation();handledTouchButton=null}else if(button&&detail.contains(button))playButtonSound(button)},true);
     back.onclick=goBack;document.getElementById('minimize').onclick=minimize;document.getElementById('exit').onclick=close;
-    if(typeof setButtonImage==='function')setButtonImage('https://raw.githubusercontent.com/61124204/WorldConqueror4-H5GG-HTMLscript/main/assistive-touch.png');
     if(typeof setButtonAction==='function')setButtonAction(open);
-    home();open();
+    home();open();preloadAssets();
   })();
   </script>
 </body>
