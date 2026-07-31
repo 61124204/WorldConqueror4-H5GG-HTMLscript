@@ -1564,1295 +1564,1295 @@
       "name": "步兵攻击",
       "type": 44,
       "level": 1,
-      "icon": "icons/general_skill_44.webp"
+      "icon": ""
     },
     {
       "id": 1502,
       "name": "步兵攻击",
       "type": 44,
       "level": 2,
-      "icon": "icons/general_skill_44.webp"
+      "icon": ""
     },
     {
       "id": 1503,
       "name": "步兵攻击",
       "type": 44,
       "level": 3,
-      "icon": "icons/general_skill_44.webp"
+      "icon": ""
     },
     {
       "id": 1504,
       "name": "步兵攻击",
       "type": 44,
       "level": 4,
-      "icon": "icons/general_skill_44.webp"
+      "icon": ""
     },
     {
       "id": 1505,
       "name": "步兵攻击",
       "type": 44,
       "level": 5,
-      "icon": "icons/general_skill_44.webp"
+      "icon": ""
     },
     {
       "id": 1511,
       "name": "步兵回血",
       "type": 45,
       "level": 1,
-      "icon": "icons/general_skill_45.webp"
+      "icon": ""
     },
     {
       "id": 1512,
       "name": "步兵回血",
       "type": 45,
       "level": 2,
-      "icon": "icons/general_skill_45.webp"
+      "icon": ""
     },
     {
       "id": 1513,
       "name": "步兵回血",
       "type": 45,
       "level": 3,
-      "icon": "icons/general_skill_45.webp"
+      "icon": ""
     },
     {
       "id": 1514,
       "name": "步兵回血",
       "type": 45,
       "level": 4,
-      "icon": "icons/general_skill_45.webp"
+      "icon": ""
     },
     {
       "id": 1515,
       "name": "步兵回血",
       "type": 45,
       "level": 5,
-      "icon": "icons/general_skill_45.webp"
+      "icon": ""
     },
     {
       "id": 1521,
       "name": "火炮攻击",
       "type": 46,
       "level": 1,
-      "icon": "icons/general_skill_46.webp"
+      "icon": ""
     },
     {
       "id": 1522,
       "name": "火炮攻击",
       "type": 46,
       "level": 2,
-      "icon": "icons/general_skill_46.webp"
+      "icon": ""
     },
     {
       "id": 1523,
       "name": "火炮攻击",
       "type": 46,
       "level": 3,
-      "icon": "icons/general_skill_46.webp"
+      "icon": ""
     },
     {
       "id": 1524,
       "name": "火炮攻击",
       "type": 46,
       "level": 4,
-      "icon": "icons/general_skill_46.webp"
+      "icon": ""
     },
     {
       "id": 1525,
       "name": "火炮攻击",
       "type": 46,
       "level": 5,
-      "icon": "icons/general_skill_46.webp"
+      "icon": ""
     },
     {
       "id": 1531,
       "name": "火炮回血",
       "type": 47,
       "level": 1,
-      "icon": "icons/general_skill_47.webp"
+      "icon": ""
     },
     {
       "id": 1532,
       "name": "火炮回血",
       "type": 47,
       "level": 2,
-      "icon": "icons/general_skill_47.webp"
+      "icon": ""
     },
     {
       "id": 1533,
       "name": "火炮回血",
       "type": 47,
       "level": 3,
-      "icon": "icons/general_skill_47.webp"
+      "icon": ""
     },
     {
       "id": 1534,
       "name": "火炮回血",
       "type": 47,
       "level": 4,
-      "icon": "icons/general_skill_47.webp"
+      "icon": ""
     },
     {
       "id": 1535,
       "name": "火炮回血",
       "type": 47,
       "level": 5,
-      "icon": "icons/general_skill_47.webp"
+      "icon": ""
     },
     {
       "id": 1541,
       "name": "坦克攻击",
       "type": 48,
       "level": 1,
-      "icon": "icons/general_skill_48.webp"
+      "icon": ""
     },
     {
       "id": 1542,
       "name": "坦克攻击",
       "type": 48,
       "level": 2,
-      "icon": "icons/general_skill_48.webp"
+      "icon": ""
     },
     {
       "id": 1543,
       "name": "坦克攻击",
       "type": 48,
       "level": 3,
-      "icon": "icons/general_skill_48.webp"
+      "icon": ""
     },
     {
       "id": 1544,
       "name": "坦克攻击",
       "type": 48,
       "level": 4,
-      "icon": "icons/general_skill_48.webp"
+      "icon": ""
     },
     {
       "id": 1545,
       "name": "坦克攻击",
       "type": 48,
       "level": 5,
-      "icon": "icons/general_skill_48.webp"
+      "icon": ""
     },
     {
       "id": 1551,
       "name": "坦克回血",
       "type": 49,
       "level": 1,
-      "icon": "icons/general_skill_49.webp"
+      "icon": ""
     },
     {
       "id": 1552,
       "name": "坦克回血",
       "type": 49,
       "level": 2,
-      "icon": "icons/general_skill_49.webp"
+      "icon": ""
     },
     {
       "id": 1553,
       "name": "坦克回血",
       "type": 49,
       "level": 3,
-      "icon": "icons/general_skill_49.webp"
+      "icon": ""
     },
     {
       "id": 1554,
       "name": "坦克回血",
       "type": 49,
       "level": 4,
-      "icon": "icons/general_skill_49.webp"
+      "icon": ""
     },
     {
       "id": 1555,
       "name": "坦克回血",
       "type": 49,
       "level": 5,
-      "icon": "icons/general_skill_49.webp"
+      "icon": ""
     },
     {
       "id": 1561,
       "name": "舰船攻击",
       "type": 50,
       "level": 1,
-      "icon": "icons/general_skill_50.webp"
+      "icon": ""
     },
     {
       "id": 1562,
       "name": "舰船攻击",
       "type": 50,
       "level": 2,
-      "icon": "icons/general_skill_50.webp"
+      "icon": ""
     },
     {
       "id": 1563,
       "name": "舰船攻击",
       "type": 50,
       "level": 3,
-      "icon": "icons/general_skill_50.webp"
+      "icon": ""
     },
     {
       "id": 1564,
       "name": "舰船攻击",
       "type": 50,
       "level": 4,
-      "icon": "icons/general_skill_50.webp"
+      "icon": ""
     },
     {
       "id": 1565,
       "name": "舰船攻击",
       "type": 50,
       "level": 5,
-      "icon": "icons/general_skill_50.webp"
+      "icon": ""
     },
     {
       "id": 1571,
       "name": "舰船回血",
       "type": 51,
       "level": 1,
-      "icon": "icons/general_skill_51.webp"
+      "icon": ""
     },
     {
       "id": 1572,
       "name": "舰船回血",
       "type": 51,
       "level": 2,
-      "icon": "icons/general_skill_51.webp"
+      "icon": ""
     },
     {
       "id": 1573,
       "name": "舰船回血",
       "type": 51,
       "level": 3,
-      "icon": "icons/general_skill_51.webp"
+      "icon": ""
     },
     {
       "id": 1574,
       "name": "舰船回血",
       "type": 51,
       "level": 4,
-      "icon": "icons/general_skill_51.webp"
+      "icon": ""
     },
     {
       "id": 1575,
       "name": "舰船回血",
       "type": 51,
       "level": 5,
-      "icon": "icons/general_skill_51.webp"
+      "icon": ""
     },
     {
       "id": 1581,
       "name": "空军攻击",
       "type": 52,
       "level": 1,
-      "icon": "icons/general_skill_52.webp"
+      "icon": ""
     },
     {
       "id": 1582,
       "name": "空军攻击",
       "type": 52,
       "level": 2,
-      "icon": "icons/general_skill_52.webp"
+      "icon": ""
     },
     {
       "id": 1583,
       "name": "空军攻击",
       "type": 52,
       "level": 3,
-      "icon": "icons/general_skill_52.webp"
+      "icon": ""
     },
     {
       "id": 1584,
       "name": "空军攻击",
       "type": 52,
       "level": 4,
-      "icon": "icons/general_skill_52.webp"
+      "icon": ""
     },
     {
       "id": 1585,
       "name": "空军攻击",
       "type": 52,
       "level": 5,
-      "icon": "icons/general_skill_52.webp"
+      "icon": ""
     },
     {
       "id": 1591,
       "name": "核弹攻击",
       "type": 53,
       "level": 1,
-      "icon": "icons/general_skill_53.webp"
+      "icon": ""
     },
     {
       "id": 1592,
       "name": "核弹攻击",
       "type": 53,
       "level": 2,
-      "icon": "icons/general_skill_53.webp"
+      "icon": ""
     },
     {
       "id": 1593,
       "name": "核弹攻击",
       "type": 53,
       "level": 3,
-      "icon": "icons/general_skill_53.webp"
+      "icon": ""
     },
     {
       "id": 1594,
       "name": "核弹攻击",
       "type": 53,
       "level": 4,
-      "icon": "icons/general_skill_53.webp"
+      "icon": ""
     },
     {
       "id": 1595,
       "name": "核弹攻击",
       "type": 53,
       "level": 5,
-      "icon": "icons/general_skill_53.webp"
+      "icon": ""
     },
     {
       "id": 1601,
       "name": "快速装填",
       "type": 54,
       "level": 1,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1602,
       "name": "快速装填",
       "type": 54,
       "level": 2,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1603,
       "name": "快速装填",
       "type": 54,
       "level": 3,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1604,
       "name": "快速装填",
       "type": 54,
       "level": 4,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1605,
       "name": "快速装填",
       "type": 54,
       "level": 5,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1606,
       "name": "快速装填",
       "type": 54,
       "level": 6,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1607,
       "name": "快速装填",
       "type": 54,
       "level": 7,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1608,
       "name": "快速装填",
       "type": 54,
       "level": 8,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1609,
       "name": "快速装填",
       "type": 54,
       "level": 9,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1610,
       "name": "快速装填",
       "type": 54,
       "level": 10,
-      "icon": "icons/general_skill_54.webp"
+      "icon": ""
     },
     {
       "id": 1701,
       "name": "装甲暴击",
       "type": 61,
       "level": 1,
-      "icon": "icons/general_skill_61.webp"
+      "icon": ""
     },
     {
       "id": 1702,
       "name": "装甲暴击",
       "type": 61,
       "level": 2,
-      "icon": "icons/general_skill_61.webp"
+      "icon": ""
     },
     {
       "id": 1703,
       "name": "装甲暴击",
       "type": 61,
       "level": 3,
-      "icon": "icons/general_skill_61.webp"
+      "icon": ""
     },
     {
       "id": 1704,
       "name": "装甲暴击",
       "type": 61,
       "level": 4,
-      "icon": "icons/general_skill_61.webp"
+      "icon": ""
     },
     {
       "id": 1705,
       "name": "装甲暴击",
       "type": 61,
       "level": 5,
-      "icon": "icons/general_skill_61.webp"
+      "icon": ""
     },
     {
       "id": 1711,
       "name": "火炮暴击",
       "type": 62,
       "level": 1,
-      "icon": "icons/general_skill_62.webp"
+      "icon": ""
     },
     {
       "id": 1712,
       "name": "火炮暴击",
       "type": 62,
       "level": 2,
-      "icon": "icons/general_skill_62.webp"
+      "icon": ""
     },
     {
       "id": 1713,
       "name": "火炮暴击",
       "type": 62,
       "level": 3,
-      "icon": "icons/general_skill_62.webp"
+      "icon": ""
     },
     {
       "id": 1714,
       "name": "火炮暴击",
       "type": 62,
       "level": 4,
-      "icon": "icons/general_skill_62.webp"
+      "icon": ""
     },
     {
       "id": 1715,
       "name": "火炮暴击",
       "type": 62,
       "level": 5,
-      "icon": "icons/general_skill_62.webp"
+      "icon": ""
     },
     {
       "id": 1721,
       "name": "步兵暴击",
       "type": 63,
       "level": 1,
-      "icon": "icons/general_skill_63.webp"
+      "icon": ""
     },
     {
       "id": 1722,
       "name": "步兵暴击",
       "type": 63,
       "level": 2,
-      "icon": "icons/general_skill_63.webp"
+      "icon": ""
     },
     {
       "id": 1723,
       "name": "步兵暴击",
       "type": 63,
       "level": 3,
-      "icon": "icons/general_skill_63.webp"
+      "icon": ""
     },
     {
       "id": 1724,
       "name": "步兵暴击",
       "type": 63,
       "level": 4,
-      "icon": "icons/general_skill_63.webp"
+      "icon": ""
     },
     {
       "id": 1725,
       "name": "步兵暴击",
       "type": 63,
       "level": 5,
-      "icon": "icons/general_skill_63.webp"
+      "icon": ""
     },
     {
       "id": 1731,
       "name": "舰船暴击",
       "type": 64,
       "level": 1,
-      "icon": "icons/general_skill_64.webp"
+      "icon": ""
     },
     {
       "id": 1732,
       "name": "舰船暴击",
       "type": 64,
       "level": 2,
-      "icon": "icons/general_skill_64.webp"
+      "icon": ""
     },
     {
       "id": 1733,
       "name": "舰船暴击",
       "type": 64,
       "level": 3,
-      "icon": "icons/general_skill_64.webp"
+      "icon": ""
     },
     {
       "id": 1734,
       "name": "舰船暴击",
       "type": 64,
       "level": 4,
-      "icon": "icons/general_skill_64.webp"
+      "icon": ""
     },
     {
       "id": 1735,
       "name": "舰船暴击",
       "type": 64,
       "level": 5,
-      "icon": "icons/general_skill_64.webp"
+      "icon": ""
     },
     {
       "id": 1741,
       "name": "空军暴击",
       "type": 65,
       "level": 1,
-      "icon": "icons/general_skill_65.webp"
+      "icon": ""
     },
     {
       "id": 1742,
       "name": "空军暴击",
       "type": 65,
       "level": 2,
-      "icon": "icons/general_skill_65.webp"
+      "icon": ""
     },
     {
       "id": 1743,
       "name": "空军暴击",
       "type": 65,
       "level": 3,
-      "icon": "icons/general_skill_65.webp"
+      "icon": ""
     },
     {
       "id": 1744,
       "name": "空军暴击",
       "type": 65,
       "level": 4,
-      "icon": "icons/general_skill_65.webp"
+      "icon": ""
     },
     {
       "id": 1745,
       "name": "空军暴击",
       "type": 65,
       "level": 5,
-      "icon": "icons/general_skill_65.webp"
+      "icon": ""
     },
     {
       "id": 1751,
       "name": "装甲暴伤",
       "type": 66,
       "level": 1,
-      "icon": "icons/general_skill_66.webp"
+      "icon": ""
     },
     {
       "id": 1752,
       "name": "装甲暴伤",
       "type": 66,
       "level": 2,
-      "icon": "icons/general_skill_66.webp"
+      "icon": ""
     },
     {
       "id": 1753,
       "name": "装甲暴伤",
       "type": 66,
       "level": 3,
-      "icon": "icons/general_skill_66.webp"
+      "icon": ""
     },
     {
       "id": 1754,
       "name": "装甲暴伤",
       "type": 66,
       "level": 4,
-      "icon": "icons/general_skill_66.webp"
+      "icon": ""
     },
     {
       "id": 1755,
       "name": "装甲暴伤",
       "type": 66,
       "level": 5,
-      "icon": "icons/general_skill_66.webp"
+      "icon": ""
     },
     {
       "id": 1761,
       "name": "火炮暴伤",
       "type": 67,
       "level": 1,
-      "icon": "icons/general_skill_67.webp"
+      "icon": ""
     },
     {
       "id": 1762,
       "name": "火炮暴伤",
       "type": 67,
       "level": 2,
-      "icon": "icons/general_skill_67.webp"
+      "icon": ""
     },
     {
       "id": 1763,
       "name": "火炮暴伤",
       "type": 67,
       "level": 3,
-      "icon": "icons/general_skill_67.webp"
+      "icon": ""
     },
     {
       "id": 1764,
       "name": "火炮暴伤",
       "type": 67,
       "level": 4,
-      "icon": "icons/general_skill_67.webp"
+      "icon": ""
     },
     {
       "id": 1765,
       "name": "火炮暴伤",
       "type": 67,
       "level": 5,
-      "icon": "icons/general_skill_67.webp"
+      "icon": ""
     },
     {
       "id": 1771,
       "name": "步兵暴伤",
       "type": 68,
       "level": 1,
-      "icon": "icons/general_skill_68.webp"
+      "icon": ""
     },
     {
       "id": 1772,
       "name": "步兵暴伤",
       "type": 68,
       "level": 2,
-      "icon": "icons/general_skill_68.webp"
+      "icon": ""
     },
     {
       "id": 1773,
       "name": "步兵暴伤",
       "type": 68,
       "level": 3,
-      "icon": "icons/general_skill_68.webp"
+      "icon": ""
     },
     {
       "id": 1774,
       "name": "步兵暴伤",
       "type": 68,
       "level": 4,
-      "icon": "icons/general_skill_68.webp"
+      "icon": ""
     },
     {
       "id": 1775,
       "name": "步兵暴伤",
       "type": 68,
       "level": 5,
-      "icon": "icons/general_skill_68.webp"
+      "icon": ""
     },
     {
       "id": 1781,
       "name": "舰船暴伤",
       "type": 69,
       "level": 1,
-      "icon": "icons/general_skill_69.webp"
+      "icon": ""
     },
     {
       "id": 1782,
       "name": "舰船暴伤",
       "type": 69,
       "level": 2,
-      "icon": "icons/general_skill_69.webp"
+      "icon": ""
     },
     {
       "id": 1783,
       "name": "舰船暴伤",
       "type": 69,
       "level": 3,
-      "icon": "icons/general_skill_69.webp"
+      "icon": ""
     },
     {
       "id": 1784,
       "name": "舰船暴伤",
       "type": 69,
       "level": 4,
-      "icon": "icons/general_skill_69.webp"
+      "icon": ""
     },
     {
       "id": 1785,
       "name": "舰船暴伤",
       "type": 69,
       "level": 5,
-      "icon": "icons/general_skill_69.webp"
+      "icon": ""
     },
     {
       "id": 1791,
       "name": "空军暴伤",
       "type": 70,
       "level": 1,
-      "icon": "icons/general_skill_70.webp"
+      "icon": ""
     },
     {
       "id": 1792,
       "name": "空军暴伤",
       "type": 70,
       "level": 2,
-      "icon": "icons/general_skill_70.webp"
+      "icon": ""
     },
     {
       "id": 1793,
       "name": "空军暴伤",
       "type": 70,
       "level": 3,
-      "icon": "icons/general_skill_70.webp"
+      "icon": ""
     },
     {
       "id": 1794,
       "name": "空军暴伤",
       "type": 70,
       "level": 4,
-      "icon": "icons/general_skill_70.webp"
+      "icon": ""
     },
     {
       "id": 1795,
       "name": "空军暴伤",
       "type": 70,
       "level": 5,
-      "icon": "icons/general_skill_70.webp"
+      "icon": ""
     },
     {
       "id": 1801,
       "name": "装甲减伤",
       "type": 71,
       "level": 1,
-      "icon": "icons/general_skill_71.webp"
+      "icon": ""
     },
     {
       "id": 1802,
       "name": "装甲减伤",
       "type": 71,
       "level": 2,
-      "icon": "icons/general_skill_71.webp"
+      "icon": ""
     },
     {
       "id": 1803,
       "name": "装甲减伤",
       "type": 71,
       "level": 3,
-      "icon": "icons/general_skill_71.webp"
+      "icon": ""
     },
     {
       "id": 1804,
       "name": "装甲减伤",
       "type": 71,
       "level": 4,
-      "icon": "icons/general_skill_71.webp"
+      "icon": ""
     },
     {
       "id": 1805,
       "name": "装甲减伤",
       "type": 71,
       "level": 5,
-      "icon": "icons/general_skill_71.webp"
+      "icon": ""
     },
     {
       "id": 1811,
       "name": "火炮减伤",
       "type": 72,
       "level": 1,
-      "icon": "icons/general_skill_72.webp"
+      "icon": ""
     },
     {
       "id": 1812,
       "name": "火炮减伤",
       "type": 72,
       "level": 2,
-      "icon": "icons/general_skill_72.webp"
+      "icon": ""
     },
     {
       "id": 1813,
       "name": "火炮减伤",
       "type": 72,
       "level": 3,
-      "icon": "icons/general_skill_72.webp"
+      "icon": ""
     },
     {
       "id": 1814,
       "name": "火炮减伤",
       "type": 72,
       "level": 4,
-      "icon": "icons/general_skill_72.webp"
+      "icon": ""
     },
     {
       "id": 1815,
       "name": "火炮减伤",
       "type": 72,
       "level": 5,
-      "icon": "icons/general_skill_72.webp"
+      "icon": ""
     },
     {
       "id": 1821,
       "name": "步兵减伤",
       "type": 73,
       "level": 1,
-      "icon": "icons/general_skill_73.webp"
+      "icon": ""
     },
     {
       "id": 1822,
       "name": "步兵减伤",
       "type": 73,
       "level": 2,
-      "icon": "icons/general_skill_73.webp"
+      "icon": ""
     },
     {
       "id": 1823,
       "name": "步兵减伤",
       "type": 73,
       "level": 3,
-      "icon": "icons/general_skill_73.webp"
+      "icon": ""
     },
     {
       "id": 1824,
       "name": "步兵减伤",
       "type": 73,
       "level": 4,
-      "icon": "icons/general_skill_73.webp"
+      "icon": ""
     },
     {
       "id": 1825,
       "name": "步兵减伤",
       "type": 73,
       "level": 5,
-      "icon": "icons/general_skill_73.webp"
+      "icon": ""
     },
     {
       "id": 1831,
       "name": "舰船减伤",
       "type": 74,
       "level": 1,
-      "icon": "icons/general_skill_74.webp"
+      "icon": ""
     },
     {
       "id": 1832,
       "name": "舰船减伤",
       "type": 74,
       "level": 2,
-      "icon": "icons/general_skill_74.webp"
+      "icon": ""
     },
     {
       "id": 1833,
       "name": "舰船减伤",
       "type": 74,
       "level": 3,
-      "icon": "icons/general_skill_74.webp"
+      "icon": ""
     },
     {
       "id": 1834,
       "name": "舰船减伤",
       "type": 74,
       "level": 4,
-      "icon": "icons/general_skill_74.webp"
+      "icon": ""
     },
     {
       "id": 1835,
       "name": "舰船减伤",
       "type": 74,
       "level": 5,
-      "icon": "icons/general_skill_74.webp"
+      "icon": ""
     },
     {
       "id": 1901,
       "name": "装甲后勤",
       "type": 75,
       "level": 1,
-      "icon": "icons/general_skill_75.webp"
+      "icon": ""
     },
     {
       "id": 1902,
       "name": "装甲后勤",
       "type": 75,
       "level": 2,
-      "icon": "icons/general_skill_75.webp"
+      "icon": ""
     },
     {
       "id": 1903,
       "name": "装甲后勤",
       "type": 75,
       "level": 3,
-      "icon": "icons/general_skill_75.webp"
+      "icon": ""
     },
     {
       "id": 1904,
       "name": "装甲后勤",
       "type": 75,
       "level": 4,
-      "icon": "icons/general_skill_75.webp"
+      "icon": ""
     },
     {
       "id": 1905,
       "name": "装甲后勤",
       "type": 75,
       "level": 5,
-      "icon": "icons/general_skill_75.webp"
+      "icon": ""
     },
     {
       "id": 1911,
       "name": "火炮后勤",
       "type": 76,
       "level": 1,
-      "icon": "icons/general_skill_76.webp"
+      "icon": ""
     },
     {
       "id": 1912,
       "name": "火炮后勤",
       "type": 76,
       "level": 2,
-      "icon": "icons/general_skill_76.webp"
+      "icon": ""
     },
     {
       "id": 1913,
       "name": "火炮后勤",
       "type": 76,
       "level": 3,
-      "icon": "icons/general_skill_76.webp"
+      "icon": ""
     },
     {
       "id": 1914,
       "name": "火炮后勤",
       "type": 76,
       "level": 4,
-      "icon": "icons/general_skill_76.webp"
+      "icon": ""
     },
     {
       "id": 1915,
       "name": "火炮后勤",
       "type": 76,
       "level": 5,
-      "icon": "icons/general_skill_76.webp"
+      "icon": ""
     },
     {
       "id": 1921,
       "name": "步兵后勤",
       "type": 77,
       "level": 1,
-      "icon": "icons/general_skill_77.webp"
+      "icon": ""
     },
     {
       "id": 1922,
       "name": "步兵后勤",
       "type": 77,
       "level": 2,
-      "icon": "icons/general_skill_77.webp"
+      "icon": ""
     },
     {
       "id": 1923,
       "name": "步兵后勤",
       "type": 77,
       "level": 3,
-      "icon": "icons/general_skill_77.webp"
+      "icon": ""
     },
     {
       "id": 1924,
       "name": "步兵后勤",
       "type": 77,
       "level": 4,
-      "icon": "icons/general_skill_77.webp"
+      "icon": ""
     },
     {
       "id": 1925,
       "name": "步兵后勤",
       "type": 77,
       "level": 5,
-      "icon": "icons/general_skill_77.webp"
+      "icon": ""
     },
     {
       "id": 1931,
       "name": "舰船后勤",
       "type": 78,
       "level": 1,
-      "icon": "icons/general_skill_78.webp"
+      "icon": ""
     },
     {
       "id": 1932,
       "name": "舰船后勤",
       "type": 78,
       "level": 2,
-      "icon": "icons/general_skill_78.webp"
+      "icon": ""
     },
     {
       "id": 1933,
       "name": "舰船后勤",
       "type": 78,
       "level": 3,
-      "icon": "icons/general_skill_78.webp"
+      "icon": ""
     },
     {
       "id": 1934,
       "name": "舰船后勤",
       "type": 78,
       "level": 4,
-      "icon": "icons/general_skill_78.webp"
+      "icon": ""
     },
     {
       "id": 1935,
       "name": "舰船后勤",
       "type": 78,
       "level": 5,
-      "icon": "icons/general_skill_78.webp"
+      "icon": ""
     },
     {
       "id": 1941,
       "name": "装甲迅捷",
       "type": 79,
       "level": 1,
-      "icon": "icons/general_skill_79.webp"
+      "icon": ""
     },
     {
       "id": 1942,
       "name": "装甲迅捷",
       "type": 79,
       "level": 2,
-      "icon": "icons/general_skill_79.webp"
+      "icon": ""
     },
     {
       "id": 1943,
       "name": "装甲迅捷",
       "type": 79,
       "level": 3,
-      "icon": "icons/general_skill_79.webp"
+      "icon": ""
     },
     {
       "id": 1944,
       "name": "装甲迅捷",
       "type": 79,
       "level": 4,
-      "icon": "icons/general_skill_79.webp"
+      "icon": ""
     },
     {
       "id": 1945,
       "name": "装甲迅捷",
       "type": 79,
       "level": 5,
-      "icon": "icons/general_skill_79.webp"
+      "icon": ""
     },
     {
       "id": 1951,
       "name": "火炮迅捷",
       "type": 80,
       "level": 1,
-      "icon": "icons/general_skill_80.webp"
+      "icon": ""
     },
     {
       "id": 1952,
       "name": "火炮迅捷",
       "type": 80,
       "level": 2,
-      "icon": "icons/general_skill_80.webp"
+      "icon": ""
     },
     {
       "id": 1953,
       "name": "火炮迅捷",
       "type": 80,
       "level": 3,
-      "icon": "icons/general_skill_80.webp"
+      "icon": ""
     },
     {
       "id": 1954,
       "name": "火炮迅捷",
       "type": 80,
       "level": 4,
-      "icon": "icons/general_skill_80.webp"
+      "icon": ""
     },
     {
       "id": 1955,
       "name": "火炮迅捷",
       "type": 80,
       "level": 5,
-      "icon": "icons/general_skill_80.webp"
+      "icon": ""
     },
     {
       "id": 1961,
       "name": "步兵迅捷",
       "type": 81,
       "level": 1,
-      "icon": "icons/general_skill_81.webp"
+      "icon": ""
     },
     {
       "id": 1962,
       "name": "步兵迅捷",
       "type": 81,
       "level": 2,
-      "icon": "icons/general_skill_81.webp"
+      "icon": ""
     },
     {
       "id": 1963,
       "name": "步兵迅捷",
       "type": 81,
       "level": 3,
-      "icon": "icons/general_skill_81.webp"
+      "icon": ""
     },
     {
       "id": 1964,
       "name": "步兵迅捷",
       "type": 81,
       "level": 4,
-      "icon": "icons/general_skill_81.webp"
+      "icon": ""
     },
     {
       "id": 1965,
       "name": "步兵迅捷",
       "type": 81,
       "level": 5,
-      "icon": "icons/general_skill_81.webp"
+      "icon": ""
     },
     {
       "id": 1971,
       "name": "海军迅捷",
       "type": 82,
       "level": 1,
-      "icon": "icons/general_skill_82.webp"
+      "icon": ""
     },
     {
       "id": 1972,
       "name": "海军迅捷",
       "type": 82,
       "level": 2,
-      "icon": "icons/general_skill_82.webp"
+      "icon": ""
     },
     {
       "id": 1973,
       "name": "海军迅捷",
       "type": 82,
       "level": 3,
-      "icon": "icons/general_skill_82.webp"
+      "icon": ""
     },
     {
       "id": 1974,
       "name": "海军迅捷",
       "type": 82,
       "level": 4,
-      "icon": "icons/general_skill_82.webp"
+      "icon": ""
     },
     {
       "id": 1975,
       "name": "海军迅捷",
       "type": 82,
       "level": 5,
-      "icon": "icons/general_skill_82.webp"
+      "icon": ""
     },
     {
       "id": 1981,
       "name": "直升机减伤",
       "type": 83,
       "level": 1,
-      "icon": "icons/general_skill_83.webp"
+      "icon": ""
     },
     {
       "id": 1982,
       "name": "直升机减伤",
       "type": 83,
       "level": 2,
-      "icon": "icons/general_skill_83.webp"
+      "icon": ""
     },
     {
       "id": 1983,
       "name": "直升机减伤",
       "type": 83,
       "level": 3,
-      "icon": "icons/general_skill_83.webp"
+      "icon": ""
     },
     {
       "id": 1984,
       "name": "直升机减伤",
       "type": 83,
       "level": 4,
-      "icon": "icons/general_skill_83.webp"
+      "icon": ""
     },
     {
       "id": 1985,
       "name": "直升机减伤",
       "type": 83,
       "level": 5,
-      "icon": "icons/general_skill_83.webp"
+      "icon": ""
     },
     {
       "id": 1991,
       "name": "直升机后勤",
       "type": 84,
       "level": 1,
-      "icon": "icons/general_skill_84.webp"
+      "icon": ""
     },
     {
       "id": 1992,
       "name": "直升机后勤",
       "type": 84,
       "level": 2,
-      "icon": "icons/general_skill_84.webp"
+      "icon": ""
     },
     {
       "id": 1993,
       "name": "直升机后勤",
       "type": 84,
       "level": 3,
-      "icon": "icons/general_skill_84.webp"
+      "icon": ""
     },
     {
       "id": 1994,
       "name": "直升机后勤",
       "type": 84,
       "level": 4,
-      "icon": "icons/general_skill_84.webp"
+      "icon": ""
     },
     {
       "id": 1995,
       "name": "直升机后勤",
       "type": 84,
       "level": 5,
-      "icon": "icons/general_skill_84.webp"
+      "icon": ""
     },
     {
       "id": 2001,
       "name": "直升机迅捷",
       "type": 85,
       "level": 1,
-      "icon": "icons/general_skill_85.webp"
+      "icon": ""
     },
     {
       "id": 2002,
       "name": "直升机迅捷",
       "type": 85,
       "level": 2,
-      "icon": "icons/general_skill_85.webp"
+      "icon": ""
     },
     {
       "id": 2003,
       "name": "直升机迅捷",
       "type": 85,
       "level": 3,
-      "icon": "icons/general_skill_85.webp"
+      "icon": ""
     },
     {
       "id": 2004,
       "name": "直升机迅捷",
       "type": 85,
       "level": 4,
-      "icon": "icons/general_skill_85.webp"
+      "icon": ""
     },
     {
       "id": 2005,
       "name": "直升机迅捷",
       "type": 85,
       "level": 5,
-      "icon": "icons/general_skill_85.webp"
+      "icon": ""
     },
     {
       "id": 3001,
