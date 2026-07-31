@@ -135,7 +135,7 @@
     const applyRemoteVisualAssets=()=>{[['generalReplace','icons/icon_general_replace.png','--asset-general-replace'],['replaceAttrs','templates/general-replace-attributes-no-arrow.png','--asset-replace-attrs'],['skillSlot','icons/icon_skill_slot.png','--asset-skill-slot'],['skillEmpty','icons/icon_skill_empty_plus_v2.png','--asset-skill-empty'],['portraits','generals/tacticalmap.webp','--asset-portraits']].forEach(([key,file,cssVar])=>{if(assetUrls[key])document.documentElement.style.setProperty(cssVar,`url("${assetRoot}${file}?v=replace-clean-3")`)})};
     assetCancel.onclick=()=>{abortAssetLoads();assetState.textContent='已取消加载，正在使用当前素材。';hideAssetLoader()};
     assetSkip.onclick=()=>{assetState.textContent='素材将在后台继续加载。';hideAssetLoader()};
-    assetReload.onclick=()=>{abortAssetLoads();assetState.textContent='正在重新拉取素材…';setTimeout(()=>{assetLoadCancelled=false;assetLoaderDismissed=false;assetLoader.classList.remove('done');assetBar.style.width='0%';assetCount.textContent=`0 / ${assetManifest.length}`;Object.keys(soundPlayers).forEach(key=>delete soundPlayers[key]);preloadAssets().then(()=>{applyRemoteVisualAssets();applyNativeButtonAsset()})},50)};
+    assetReload.onclick=()=>{abortAssetLoads();assetState.textContent='正在重新拉取素材…';setTimeout(()=>{assetLoadCancelled=false;assetLoaderDismissed=false;assetLoader.classList.remove('done');assetBar.style.width='0%';assetCount.textContent=`0 / ${assetManifest.length}`;Object.keys(soundPlayers).forEach(key=>delete soundPlayers[key]);soundsUnlocked=false;preloadAssets().then(()=>{applyRemoteVisualAssets();applyNativeButtonAsset();primeSounds()})},50)};
     const generalsDataUrl='',portraitMapUrl='';
     let located=null,searchMode='',records=[],generalsCache=null,portraitMap=null,generalSearchTimer=0,generalNavigationToken=0,generalReturnTimer=0,generalMenuOpening=false,generalResultActive=false,generalSearchBusy=false,currentPage=null,pageStack=[];
     const setPage=page=>{currentPage=page};
@@ -202,19 +202,22 @@
     const writeColor=color=>{const colorAddress=addr(located.address,0x94n);if(!h5gg.setValue(colorAddress,String(colorValue(color)),'U32'))return doneAtLocated('底色写入失败。');doneAtLocated(`底色已改为 ${color}。`)};
     const recordMenu=()=>{setPage(recordMenu);title.textContent='修改记录';desc.textContent='点击记录可重新打开对应操作。';back.classList.add('show');if(!records.length)return message('暂无已保存地址记录。',true);buttons(records.map((r,i)=>[`记录 ${i+1}`,`${r.address} · ${r.time}`,()=>{located={address:r.address,mode:r.mode||'simple',values:{}};locatedMenu()}]))};
     const message=(text,keep)=>{setPage(()=>message(text,keep));title.textContent='提示';desc.textContent=text;actions.innerHTML=`<div class="search-form"><div class="convert-preview"><b>${text}</b></div><div class="form-actions"><button id="ok" class="primary" type="button">返回</button></div></div>`;document.getElementById('ok').onclick=goBack};
-    const soundUrls={select:'',cancel:'',click:''},soundPlayers={};
-    const playSound=kind=>{if(!soundUrls[kind])return;try{const player=soundPlayers[kind]||(soundPlayers[kind]=new Audio(soundUrls[kind]));player.currentTime=0;const play=player.play();if(play)play.catch(()=>{})}catch(error){}};
+    const soundUrls={select:'',cancel:'',click:''},soundPlayers={};let soundsUnlocked=false,soundUnlocking=false;
+    const primeSounds=()=>Object.keys(soundUrls).forEach(kind=>{if(!soundUrls[kind]||soundPlayers[kind])return;try{const player=new Audio(soundUrls[kind]);player.preload='auto';player.load();soundPlayers[kind]=player}catch(error){}});
+    const unlockSounds=()=>{if(soundsUnlocked||soundUnlocking)return;primeSounds();const player=soundPlayers.select||soundPlayers.click||soundPlayers.cancel;if(!player)return;soundUnlocking=true;const oldMuted=player.muted,oldVolume=player.volume;try{player.muted=true;player.volume=.001;player.currentTime=0;const attempt=player.play(),done=()=>{try{player.pause();player.currentTime=0;player.muted=oldMuted;player.volume=oldVolume}catch(error){}soundsUnlocked=true;soundUnlocking=false},fail=()=>{try{player.muted=oldMuted;player.volume=oldVolume}catch(error){}soundUnlocking=false};if(attempt&&typeof attempt.then==='function')attempt.then(done).catch(fail);else done()}catch(error){soundUnlocking=false}};
+    const playSound=kind=>{if(!soundUrls[kind])return;try{primeSounds();const player=soundPlayers[kind];if(!player)return;player.currentTime=0;const play=player.play();if(play)play.catch(()=>{})}catch(error){}};
     const playButtonSound=button=>{if(!button)return;const isReturn=button.id==='back'||button.textContent.includes('返回');playSound(button.id==='minimize'?'click':isReturn?'cancel':'select')};
     const open=()=>{if(typeof setWindowVisible==='function')setWindowVisible(true);if(typeof setWindowTouch==='function')setWindowTouch(true);detail.classList.add('open')};
     const minimize=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false)};
     const close=()=>{detail.classList.remove('open');if(typeof setWindowTouch==='function')setWindowTouch(false);try{if(typeof h5gg!=='undefined')h5gg.clearResults()}catch(e){}setTimeout(()=>{try{window.location.reload()}catch(e){location.href=location.href}},120)};
     let touchStart=null,handledTouchButton=null;
-    document.addEventListener('touchstart',event=>{const button=event.target.closest&&event.target.closest('button');if(button&&detail.contains(button)){const point=event.changedTouches[0];touchStart={button,x:point.clientX,y:point.clientY}}},false);
+    document.addEventListener('touchstart',event=>{unlockSounds();const button=event.target.closest&&event.target.closest('button');if(button&&detail.contains(button)){const point=event.changedTouches[0];touchStart={button,x:point.clientX,y:point.clientY}}},false);
+    document.addEventListener('mousedown',unlockSounds,{passive:true});
     document.addEventListener('touchend',event=>{const button=event.target.closest&&event.target.closest('button');if(!touchStart||button!==touchStart.button)return;const point=event.changedTouches[0],distance=Math.hypot(point.clientX-touchStart.x,point.clientY-touchStart.y);touchStart=null;if(distance>12||typeof button.onclick!=='function')return;event.preventDefault();handledTouchButton=button;playButtonSound(button);button.onclick();},false);
     document.addEventListener('click',event=>{const button=event.target.closest&&event.target.closest('button');if(button&&button===handledTouchButton){event.preventDefault();event.stopImmediatePropagation();handledTouchButton=null}else if(button&&detail.contains(button))playButtonSound(button)},true);
     back.onclick=()=>generalResultActive?returnToGeneralPicker():goBack();document.getElementById('minimize').onclick=minimize;document.getElementById('exit').onclick=close;
     if(typeof setButtonAction==='function')setButtonAction(open);
-    home();open();preloadAssets().then(()=>{applyRemoteVisualAssets();applyNativeButtonAsset()});
+    home();open();preloadAssets().then(()=>{applyRemoteVisualAssets();applyNativeButtonAsset();primeSounds()});
   })();
   </script>
 </body>
