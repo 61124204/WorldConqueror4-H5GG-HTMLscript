@@ -145,8 +145,8 @@
     const loadPortraitMap=()=>Promise.resolve(assetTexts.portraitMap||'').then(text=>{const map={},pattern=/<Image\s+name="head_([^"]+)\.png"\s+x="(\d+)"\s+y="(\d+)"/g;let match;while((match=pattern.exec(text)))map[match[1]]={x:Number(match[2]),y:Number(match[3])};return map}).catch(()=>({}));
     const portraitFor=general=>portraitMap&&(portraitMap[general.photo]||portraitMap[general.englishName]);
     const portraitStyle=general=>{const portrait=portraitFor(general);return portrait?`--portrait-x:-${(portrait.x*4/7).toFixed(3)}px;--portrait-y:-${(portrait.y*4/7).toFixed(3)}px`:''};
-    try{records=JSON.parse(localStorage.getItem('wc4-legion-records')||'[]')}catch(e){}
-    const saveRecords=()=>{try{localStorage.setItem('wc4-legion-records',JSON.stringify(records.slice(0,30)))}catch(e){}};
+    try{localStorage.removeItem('wc4-legion-records')}catch(e){}
+    const saveRecords=()=>{};
     const load=task=>{loading.classList.add('show');setTimeout(()=>{Promise.resolve().then(task).catch(e=>message('操作失败：'+(e.message||e))).finally(()=>loading.classList.remove('show'))},260)};
     const iconClass=label=>({'局外修改':'icon-outside','局内修改':'icon-inside','修改记录':'icon-record','贸易修改':'icon-trade','将领修改':'icon-general','将领替换':'icon-general-replace','技能槽修改':'icon-skill-empty','技能修改':'icon-skill-slot','面板能力修改':'icon-unit','材料修改':'icon-material','勋章修改':'icon-medal','资源修改':'icon-resource','兵种修改':'icon-unit','一键通关':'icon-victory','简单搜索':'icon-resource','三项搜索':'icon-tech'})[label]||'icon-home';
     const buttons=items=>{actions.innerHTML=items.map((x,i)=>`<button class="action ${iconClass(x[0])}" type="button" data-i="${i}"><strong>${x[0]}</strong><small>${x[1]||''}</small></button>`).join('');actions.scrollTop=0;document.querySelectorAll('[data-i]').forEach(b=>b.onclick=()=>openPage(items[Number(b.dataset.i)][2]))};
