@@ -1,0 +1,298 @@
+﻿{
+    "version":  1,
+    "stages":  [
+                   {
+                       "id":  "event80502",
+                       "name":  "事件 80502",
+                       "source":  "event80502.btl",
+                       "countries":  [
+                                         {
+                                             "sequence":  1,
+                                             "id":  6,
+                                             "name":  "美国",
+                                             "economy":  520,
+                                             "industry":  190,
+                                             "technology":  30,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#B4FFDC"
+                                         },
+                                         {
+                                             "sequence":  2,
+                                             "id":  6,
+                                             "name":  "美国",
+                                             "economy":  580,
+                                             "industry":  170,
+                                             "technology":  26,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#96FFBE"
+                                         },
+                                         {
+                                             "sequence":  3,
+                                             "id":  6,
+                                             "name":  "美国",
+                                             "economy":  300,
+                                             "industry":  100,
+                                             "technology":  25,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#D2FFFF"
+                                         },
+                                         {
+                                             "sequence":  4,
+                                             "id":  1,
+                                             "name":  "英国",
+                                             "economy":  450,
+                                             "industry":  160,
+                                             "technology":  22,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#E6E66E"
+                                         },
+                                         {
+                                             "sequence":  5,
+                                             "id":  1,
+                                             "name":  "英国",
+                                             "economy":  400,
+                                             "industry":  120,
+                                             "technology":  30,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#FAFA96"
+                                         },
+                                         {
+                                             "sequence":  6,
+                                             "id":  2,
+                                             "name":  "法国",
+                                             "economy":  350,
+                                             "industry":  120,
+                                             "technology":  26,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#96E6FF"
+                                         },
+                                         {
+                                             "sequence":  7,
+                                             "id":  40,
+                                             "name":  "巴西",
+                                             "economy":  450,
+                                             "industry":  120,
+                                             "technology":  22,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#46BE64"
+                                         },
+                                         {
+                                             "sequence":  8,
+                                             "id":  39,
+                                             "name":  "哥伦比亚",
+                                             "economy":  420,
+                                             "industry":  100,
+                                             "technology":  25,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#FAFA55"
+                                         },
+                                         {
+                                             "sequence":  9,
+                                             "id":  45,
+                                             "name":  "阿根廷",
+                                             "economy":  330,
+                                             "industry":  100,
+                                             "technology":  24,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#96D3FF"
+                                         },
+                                         {
+                                             "sequence":  10,
+                                             "id":  44,
+                                             "name":  "智利",
+                                             "economy":  280,
+                                             "industry":  100,
+                                             "technology":  18,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#D2BEE6"
+                                         },
+                                         {
+                                             "sequence":  11,
+                                             "id":  50,
+                                             "name":  "黑蝎部队",
+                                             "economy":  580,
+                                             "industry":  220,
+                                             "technology":  32,
+                                             "control":  1,
+                                             "faction":  3,
+                                             "color":  "#78A0D2"
+                                         },
+                                         {
+                                             "sequence":  12,
+                                             "id":  50,
+                                             "name":  "黑蝎部队",
+                                             "economy":  500,
+                                             "industry":  160,
+                                             "technology":  27,
+                                             "control":  1,
+                                             "faction":  3,
+                                             "color":  "#7878B4"
+                                         },
+                                         {
+                                             "sequence":  13,
+                                             "id":  50,
+                                             "name":  "黑蝎部队",
+                                             "economy":  620,
+                                             "industry":  200,
+                                             "technology":  32,
+                                             "control":  1,
+                                             "faction":  3,
+                                             "color":  "#78A0F0"
+                                         },
+                                         {
+                                             "sequence":  14,
+                                             "id":  37,
+                                             "name":  "墨西哥",
+                                             "economy":  500,
+                                             "industry":  110,
+                                             "technology":  20,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#BE875A"
+                                         },
+                                         {
+                                             "sequence":  15,
+                                             "id":  3,
+                                             "name":  "二战德国",
+                                             "economy":  550,
+                                             "industry":  140,
+                                             "technology":  28,
+                                             "control":  1,
+                                             "faction":  3,
+                                             "color":  "#A0A0A0"
+                                         },
+                                         {
+                                             "sequence":  16,
+                                             "id":  5,
+                                             "name":  "苏联",
+                                             "economy":  550,
+                                             "industry":  200,
+                                             "technology":  24,
+                                             "control":  0,
+                                             "faction":  1,
+                                             "color":  "#F08C8C"
+                                         },
+                                         {
+                                             "sequence":  17,
+                                             "id":  5,
+                                             "name":  "苏联",
+                                             "economy":  600,
+                                             "industry":  200,
+                                             "technology":  30,
+                                             "control":  1,
+                                             "faction":  1,
+                                             "color":  "#F0AAAA"
+                                         },
+                                         {
+                                             "sequence":  18,
+                                             "id":  5,
+                                             "name":  "苏联",
+                                             "economy":  280,
+                                             "industry":  120,
+                                             "technology":  23,
+                                             "control":  1,
+                                             "faction":  1,
+                                             "color":  "#FFA082"
+                                         },
+                                         {
+                                             "sequence":  19,
+                                             "id":  5,
+                                             "name":  "苏联",
+                                             "economy":  620,
+                                             "industry":  180,
+                                             "technology":  30,
+                                             "control":  1,
+                                             "faction":  1,
+                                             "color":  "#D25050"
+                                         },
+                                         {
+                                             "sequence":  20,
+                                             "id":  38,
+                                             "name":  "古巴",
+                                             "economy":  450,
+                                             "industry":  120,
+                                             "technology":  20,
+                                             "control":  1,
+                                             "faction":  1,
+                                             "color":  "#DCA5BE"
+                                         },
+                                         {
+                                             "sequence":  21,
+                                             "id":  42,
+                                             "name":  "委内瑞拉",
+                                             "economy":  350,
+                                             "industry":  90,
+                                             "technology":  18,
+                                             "control":  1,
+                                             "faction":  1,
+                                             "color":  "#649BFA"
+                                         },
+                                         {
+                                             "sequence":  22,
+                                             "id":  41,
+                                             "name":  "玻利维亚",
+                                             "economy":  360,
+                                             "industry":  90,
+                                             "technology":  18,
+                                             "control":  1,
+                                             "faction":  1,
+                                             "color":  "#D2B45A"
+                                         },
+                                         {
+                                             "sequence":  23,
+                                             "id":  43,
+                                             "name":  "秘鲁",
+                                             "economy":  420,
+                                             "industry":  90,
+                                             "technology":  20,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#DC7878"
+                                         },
+                                         {
+                                             "sequence":  24,
+                                             "id":  6,
+                                             "name":  "美国",
+                                             "economy":  550,
+                                             "industry":  140,
+                                             "technology":  24,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#96DCDC"
+                                         },
+                                         {
+                                             "sequence":  25,
+                                             "id":  5,
+                                             "name":  "苏联",
+                                             "economy":  450,
+                                             "industry":  130,
+                                             "technology":  26,
+                                             "control":  1,
+                                             "faction":  1,
+                                             "color":  "#F07896"
+                                         },
+                                         {
+                                             "sequence":  26,
+                                             "id":  40,
+                                             "name":  "巴西",
+                                             "economy":  440,
+                                             "industry":  100,
+                                             "technology":  22,
+                                             "control":  1,
+                                             "faction":  2,
+                                             "color":  "#64BE82"
+                                         }
+                                     ]
+                   }
+               ]
+}
