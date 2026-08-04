@@ -141,7 +141,8 @@
     assetReload.onclick=()=>{abortAssetLoads();assetState.textContent='正在重新拉取素材…';setTimeout(()=>{assetLoadCancelled=false;assetLoaderDismissed=false;assetLoader.classList.remove('done');assetBar.style.width='0%';assetCount.textContent=`0 / ${assetManifest.length}`;Object.keys(soundPlayers).forEach(key=>delete soundPlayers[key]);soundsUnlocked=false;preloadAssets().then(()=>{applyRemoteVisualAssets();applyNativeButtonAsset();primeSounds()})},50)};
     const generalsDataUrl='',portraitMapUrl='';
     let located=null,searchMode='',records=[],generalsCache=null,skillsCache=null,portraitMap=null,generalSearchTimer=0,generalNavigationToken=0,generalReturnTimer=0,generalMenuOpening=false,generalResultActive=false,generalSearchBusy=false,currentPage=null,pageStack=[];
-    const setPage=page=>{currentPage=page};
+    const activateInputs=()=>{const inputs=actions.querySelectorAll('input');if(!inputs.length)return;try{if(typeof setWindowTouch==='function')setWindowTouch(true);detail.classList.add('open')}catch(error){}inputs.forEach(input=>{input.disabled=false;input.style.pointerEvents='auto';input.style.webkitUserSelect='text';const focus=()=>{try{if(typeof setWindowTouch==='function')setWindowTouch(true);detail.classList.add('open');input.focus()}catch(error){}};input.ontouchstart=focus;input.onpointerdown=focus;input.onclick=focus})};
+    const setPage=page=>{currentPage=page;setTimeout(activateInputs,0)};
     const openPage=page=>{if(currentPage)pageStack.push(currentPage);page()};
     const goBack=()=>{const page=pageStack.pop();if(page)page();else home()};
     const loadPortraitMap=()=>Promise.resolve(assetTexts.portraitMap||'').then(text=>{const map={},pattern=/<Image\s+name="head_([^"]+)\.png"\s+x="(\d+)"\s+y="(\d+)"/g;let match;while((match=pattern.exec(text)))map[match[1]]={x:Number(match[2]),y:Number(match[3])};return map}).catch(()=>({}));
