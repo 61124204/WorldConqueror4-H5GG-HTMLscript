@@ -1,0 +1,50 @@
+PASS integer validation and boundaries
+PASS XOR reversible at boundaries
+PASS signed U32 normalization
+PASS RGBA little-endian color and signed DWORD
+PASS JSON BOM, nesting, escaped strings, false and null
+PASS JSON Unicode escapes and surrogate pair
+PASS JSON rejects invalid and executable text
+PASS JSON size and nesting limits
+PASS search reaches matches beyond first 512 candidates
+PASS late duplicate prevents false uniqueness
+PASS 64-bit address above old iOS search limit
+PASS result cap aborts whole search
+PASS short candidate page aborts
+PASS duplicate candidate page aborts
+PASS unreadable candidate aborts instead of disappearing
+PASS empty result cannot be written
+PASS panel offsets and current-star signature
+PASS slot lookup checks all twelve catalog attributes
+PASS resource triple plus strict country color
+PASS write, readback and LIFO undo with nil API success
+PASS cancel leaves memory unchanged
+PASS stale guard rejects before write
+PASS confirmation race rechecks original values
+PASS partial write failure restores all targets
+PASS failed rollback blocks edits and keeps recovery record
+PASS readback mismatch triggers rollback
+PASS user-paused process stays paused
+PASS failed pause prevents writes
+PASS foreign overlapping QWORD freeze is preserved and rejected
+PASS own lock requires explicit unlock
+PASS PID change rejects old addresses and clears locks
+PASS same PID but different package is rejected
+PASS undo refuses game-changed values
+PASS duplicate transaction address rejects
+PASS skill replacement writes TARGET flag and supports undo
+PASS all gift markers restore before final inventory write
+PASS changed gift markers never blindly overwrite
+PASS gift restoration cannot cross PID
+PASS lock updates value then stops on guard change
+PASS panel cannot exceed six stars
+PASS integer-safe pagination keeps final partial page
+PASS pagination formula tolerates GG truncated division
+PASS target switch during read invalidates batch
+PASS target switch after write prevents rollback into new process
+PASS deferred recovery rejects unexpected intervening value
+PASS target info missing PID fails closed
+PASS unaligned address fails before GG write
+PASS numeric float integer accepted without tostring dependency
+
+RESULT: 48 passed, 0 failed (mock API only; Lua 5.4)
