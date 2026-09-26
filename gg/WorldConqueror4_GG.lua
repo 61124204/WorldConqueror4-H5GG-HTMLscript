@@ -18,7 +18,7 @@ local S = {history={}, locks={}, catalogs={}, epoch=0, maxResults=200000, batch=
 C.state=S
 local order={'march','infantry','armor','artillery','navy','airForce'}
 local stars={'行军','步兵','坦克','炮兵','海军','空军'}
-local unitNames={'当前生命','生命上限','当前移动力','士气持续时间','士气状态','技能持续时间','技能冷却时间','攻击状态'}
+local unitNames={'当前生命','生命上限','当前移动力','士气持续时间','士气状态','技能持续时间','技能冷却时间','攻击状态（0可攻击/1不可攻击）'}
 local function fail(s) error(tostring(s),0) end
 local function trim(s) return tostring(s or ''):match('^%s*(.-)%s*$') end
 function C.integer(s,lo,hi)
@@ -27,6 +27,11 @@ function C.integer(s,lo,hi)
   local n=type(s)=='number' and s or tonumber(t)
   if not n or n~=n or n%1~=0 or n<(lo or -2147483648) or n>(hi or I32MAX) then fail('整数超出范围：'..t) end
   return n
+end
+-- GG truncates integer-first division; avoid math.ceil(integer / integer).
+function C.pageCount(n,size)
+  n=C.integer(n,0,I32MAX); size=C.integer(size,1,I32MAX)
+  return math.floor((n+size-1)/size)
 end
 function C.signed(n) n=n%U32; if n>=2147483648 then n=n-U32 end; return n end
 function C.xor(a,b)
@@ -80,7 +85,9 @@ function C.read(addrs)
   for start=1,#addrs,S.batch do
     local q={}
     for i=start,math.min(start+S.batch-1,#addrs) do q[#q+1]={address=address(addrs[i]),flags=G.TYPE_DWORD} end
+    C.check()
     local r=G.getValues(q)
+    C.check()
     if type(r)~='table' or #r~=#q then fail('内存读取失败；停止本次定位，不能把未读候选当作不匹配。') end
     for j,v in ipairs(r) do
       local n=tonumber(v.value)
@@ -164,6 +171,7 @@ local function setAndVerify(items)
     q[i]=address(p.address)
     w[i]={address=p.address,flags=G.TYPE_DWORD,value=tostring(C.signed(p.value))}
   end
+  C.check() -- Includes rollback: never write old addresses into a new target.
   result(G.setValues(w),'写入失败')
   local vals=C.read(q)
   for i,p in ipairs(items) do if vals[i]~=C.signed(p.value) then fail('写入回读不一致：'..hex(p.address)) end end
@@ -222,7 +230,16 @@ function C.recover()
   if not p then return end
   C.check()
   if p.key~=S.key or p.epoch~=S.epoch then fail('恢复记录不属于当前会话') end
-  withPause(function() noForeignFreeze(p.old); setAndVerify(p.old) end)
+  withPause(function()
+    local q={}; for i,v in ipairs(p.old) do q[i]=v.address end
+    local current=C.read(q)
+    for i,v in ipairs(current) do
+      if v~=p.old[i].value and v~=p.new[i].value then
+        fail('待恢复地址已出现其他数值：'..hex(q[i])..'。拒绝覆盖；请导出诊断，必要时恢复存档备份。')
+      end
+    end
+    noForeignFreeze(p.old); setAndVerify(p.old)
+  end)
   S.pending=nil
 end
 function C.undo()
@@ -391,10 +408,10 @@ local function picker(rows,title,formatter)
     for i=(page-1)*25+1,math.min(page*25,#filtered) do labels[#labels+1]=filtered[i].line; keys[#keys+1]=i end
     local prev=#labels+1; labels[prev]='上一页'
     local nextp=#labels+1; labels[nextp]='下一页'
-    local c=G.choice(labels,nil,title..' '..page..'/'..math.ceil(#filtered/25))
+    local c=G.choice(labels,nil,title..' '..page..'/'..C.pageCount(#filtered,25))
     if not c then return nil end
     if c==prev then page=math.max(1,page-1)
-    elseif c==nextp then page=math.min(math.ceil(#filtered/25),page+1)
+    elseif c==nextp then page=math.min(C.pageCount(#filtered,25),page+1)
     else return filtered[keys[c]].row end
   end
 end
